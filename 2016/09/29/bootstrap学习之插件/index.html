@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+
+    <!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no" />
+<meta name="author" content="Mr stone" />
+
+
+
+<meta name="description" content="Bootstrap全部知识点整理思维导图插件函数学习思维导图">
+<meta property="og:type" content="article">
+<meta property="og:title" content="bootstrap学习之插件">
+<meta property="og:url" content="http://xiaoyi00112.github.io/2016/09/29/bootstrap学习之插件/index.html">
+<meta property="og:site_name" content="hexo姣小屋">
+<meta property="og:description" content="Bootstrap全部知识点整理思维导图插件函数学习思维导图">
+<meta property="og:updated_time" content="2016-10-03T14:44:39.582Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="bootstrap学习之插件">
+<meta name="twitter:description" content="Bootstrap全部知识点整理思维导图插件函数学习思维导图">
+
+<link rel="apple-touch-icon" href= "/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="hexo姣小屋" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="/favicon.png">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>bootstrap学习之插件 | hexo姣小屋</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: undefined
+    }
+</script>
+
+
+    <script> yiliaConfig.jquery_ui = [false]; </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/head.jpg" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">Mr stone</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">HEXO心灵小屋</p>
+        
+
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" href="mailto:499686855@qq.com" title="Email"></a>
+                            
+                                <a class="fa 新浪微博" href="http://weibo.com/3219827273" title="新浪微博"></a>
+                            
+                                <a class="fa GitHub" href="https://github.com/xiaoyi00112" title="GitHub"></a>
+                            
+                                <a class="fa 知乎" href="https://www.zhihu.com/people/wang-yan-43-63" title="知乎"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/BUG/">BUG</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Markdown语法/">Markdown语法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bootstrap/">bootstrap</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前端/">前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/随笔/">随笔</a></li></ul>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://pages.github.com/">GitHub</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://moxfive.xyz/">MOxFIVE</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">专注于前端</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">Mr stone</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/head.jpg" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">Mr stone</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">HEXO心灵小屋</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="mailto:499686855@qq.com" title="Email"></a>
+                            
+                                <a class="fa 新浪微博" target="_blank" href="http://weibo.com/3219827273" title="新浪微博"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="https://github.com/xiaoyi00112" title="GitHub"></a>
+                            
+                                <a class="fa 知乎" target="_blank" href="https://www.zhihu.com/people/wang-yan-43-63" title="知乎"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
+</nav>
+      <div class="body-wrap"><article id="post-bootstrap学习之插件" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/09/29/bootstrap学习之插件/" class="article-date">
+      <time datetime="2016-09-29T01:50:31.000Z" itemprop="datePublished">2016-09-29</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      bootstrap学习之插件
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/前端/">前端</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/bootstrap/">bootstrap</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/前端/">前端</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>Bootstrap全部知识点整理<a href="/imgs/Bootstrap全部知识点整理.svg">思维导图</a><br>插件函数学习<a href="/imgs/BootstrapPlugin.svg">思维导图</a></p>
+<a id="more"></a>
+<h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><ol>
+<li>Bootstrap提供给了用户十几个基于jQuery的插件函数，可以一次性全部引入，也可以进行单个插件函数的引入。</li>
+<li><p>调用方式有两种</p>
+<ul>
+<li><p>data属性进行调用，关闭方法</p>
+<pre><code>$(document).off(&apos;.data-api&apos;)
+</code></pre></li>
+<li><p>编程方式的API</p>
+<pre><code>$(&apos;.btn.danger&apos;).button(&apos;toggle&apos;).addClass(&apos;fat&apos;)
+</code></pre></li>
+</ul>
+</li>
+</ol>
+<h3 id="下拉菜单"><a href="#下拉菜单" class="headerlink" title="下拉菜单"></a>下拉菜单</h3><ol>
+<li>data属性方式：给链接或button添加data-toggle=”dropdown”</li>
+<li>js方法调用：$(‘.dropdown-toggle’).dropdown(),但是仍然需要加上data-toggle=”dropdown”。特殊效果是使下拉菜单一上来就显示$(‘.dropdown-toggle’).dropdown(‘toggle’)</li>
+</ol>
+<h3 id="标签页"><a href="#标签页" class="headerlink" title="标签页"></a>标签页</h3><ol>
+<li>data方式：data-toggle=”tab” or data-toggle=”pill”;<ul><li><a data-toggle="tab" href="#TABID"></a></li>
+<li><p>js方式：加入js代码（each tab needs to be activated individually）</p>
+<pre><code>$(&apos;#myTab a&apos;).click(function (e) {
+  e.preventDefault()
+  $(this).tab(&apos;show&apos;)
+})
+</code></pre></li>
+<li>Fade effect:渐变效果;.fade .in</li>
+</ul></li></ol>
+<h3 id="警告框"><a href="#警告框" class="headerlink" title="警告框"></a>警告框</h3><ol>
+<li>.alert .alert-warning<br>小差号：&amp;+times;加上.close会浮动到右边，<strong>注意：</strong>带符号的元素应该放到第一个子元素的位置上。  </li>
+<li>官方文档有一个”.sr-only”的属性，此属性是专为屏幕阅读器准备，屏幕阅读器外，其他设备上隐藏该元素，帮助残障人士设计。</li>
+<li>实现关闭效果推荐用data-的方式。具体实现方式是给button标签增加 data-dismiss=”alert” 自定义属性。</li>
+<li>如果给父元素添加 .fade 和 .in 类，那么元素关闭时呈现淡入淡出效果</li>
+</ol>
+<h3 id="工具提示、弹出框和摸态框"><a href="#工具提示、弹出框和摸态框" class="headerlink" title="工具提示、弹出框和摸态框"></a>工具提示、弹出框和摸态框</h3><p>三种形式的弹出框：1.工具提示（tooltip）；2.弹出框（popover）;(3).模态(modal)弹出框–重点；</p>
+<ol>
+<li><p>工具提示：加一个data-toggle=”toolti” title=”提示文字” data-placement=”弹出位置”，还需要加上一行js代码进行初始化：</p>
+<pre><code>$(function(){
+  $(&apos;[data-toggle=&quot;tooltip&quot;]&apos;).tooltip();
+})
+</code></pre></li>
+<li><p>弹出框：data-toggle=”popover” title=”标题” data-content=”弹出内容” ，同样也需要js代码进行初始化：</p>
+<pre><code>$(
+  $(&apos;[data-toggle=&quot;popover&quot;]&apos;).popover();
+)
+</code></pre></li>
+<li><p>模态弹出框： </p>
+<ul>
+<li>模态(Modal)子窗体：由某个父窗体打开，只要子窗体不关闭，父窗体无法获得输入焦点；且父子窗体可以互相传递数据。</li>
+<li>具体实现：摸态框固定定位，初始时一般不显示，将模态框放到HTML代码的文档最高层级，推荐放到body的最后，直接作为body的子元素。</li>
+<li>a触发:data-toggle=”modal” herf=”目标元素”</li>
+<li>button触发：data-toggle=”modal” data-target=”目标元素”</li>
+<li><p>模态框的结构：</p>
+<pre><code>&lt;div class=&quot;modal&quot;&gt;--全屏的遮罩层
+  &lt;div class=&quot;modal-dialog&quot;&gt;--&gt;宽高、定位
+    &lt;div class=&quot;modal-content&quot;&gt;--&gt;背景色、边框、倒角、阴影
+      &lt;div class=&quot;modal-header&quot;&gt;&lt;/div&gt;
+      &lt;div class=&quot;modal-body&quot;&gt;&lt;/div&gt;
+      &lt;div class=&quot;modal-footer&quot;&gt;&lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre></li>
+<li><p>可以使用data-dsimiss=”modal”来关闭模态框。</p>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="Collapse折叠效果"><a href="#Collapse折叠效果" class="headerlink" title="Collapse折叠效果"></a>Collapse折叠效果</h3><ol>
+<li>使用a标签和button触发一个普通折叠效果：data-toggle=”collapse”;class里面有in的时候默认为显示，没有默认为隐藏  </li>
+<li>手风琴折叠效果：需要借助面板组件配合实现。需要.panel-group 可以吧导航信息放到</li>
+<li><p>响应式导航条：类似Bootstrap官网折叠导航栏效果</p>
+<pre><code>&lt;div  class=&quot;navbar navbar-default&quot;&gt;
+  &lt;div class=&quot;container&quot;&gt;
+    &lt;div class=&quot;navbar-header&quot;&gt;
+      &lt;a href=&quot;#&quot; class=&quot;navbar-brand&quot;&gt;TARENA&lt;/a&gt;
+      &lt;a href=&quot;#myNBA&quot; class=&quot;navbar-toggle&quot; data-toggle=&quot;collapse&quot;&gt;
+        &lt;span class=&quot;icon-bar&quot;&gt;&lt;/span&gt;
+        &lt;span class=&quot;icon-bar&quot;&gt;&lt;/span&gt;
+        &lt;span class=&quot;icon-bar&quot;&gt;&lt;/span&gt;
+      &lt;/a&gt;
+    &lt;/div&gt;
+    &lt;div id=&quot;myNBA&quot; class=&quot;collapse navbar-collapse&quot;&gt;
+      &lt;ul class=&quot;nav navbar-nav&quot;&gt;
+        &lt;li&gt;&lt;a href=&quot;#&quot;&gt;首页&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&quot;#&quot;&gt;首页1&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&quot;#&quot;&gt;首页2&lt;/a&gt;&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre></li>
+</ol>
+<h3 id="Carousel广告轮播。旋转木马"><a href="#Carousel广告轮播。旋转木马" class="headerlink" title="Carousel广告轮播。旋转木马"></a>Carousel广告轮播。旋转木马</h3><ol>
+<li>首先需要一个carousel的父容器div，slide是带滑动效果，id为了之后的点击滑动，data-ride=”carousel”,data-interval=”设定时间”；</li>
+<li>然后内部建立carousel-inner,内部建立一个.item的div，div中一次可以放img图片和加入图片的文字，加入文字需要再建立一个.carousel-caption的容器div，里面放入内容</li>
+<li>左右点击用a标签，href制定为carousel父容器的id，data-slide=”prev/next”</li>
+<li>滑动可以用ul和li来制作，ul的class为carousel-indicators,li设置data-target=”ID” data-slide-to=”图片位置”。</li>
+<li><strong>注意：</strong>放在carousel-inner外的元素不随广告滚动</li>
+</ol>
+<h3 id="Affix附加导航"><a href="#Affix附加导航" class="headerlink" title="Affix附加导航"></a>Affix附加导航</h3><p>给每个标题加上id,然后添加一个data-spy=”affix”的导航元素。元素内部还定义有一个data-offset-top=””的属性。</p>
+<ul>
+<li>data-spy=”affix” 定义导航元素。</li>
+<li>data-offset-top:<strong>从网上找了好多答案，说的都挺模糊</strong>其实这个属性还可以写成data-offset和data-offset-bottom,这两种形式，data-offset-top的意思是当你鼠标往上滚动的距离为多少的时候，这个导航条会随着页面动，也就是说，如果你把这个值设为0，你一往下滚动鼠标，导航条就随着页面动，如果设为100，那么你的鼠标滚动100px的时候导航条才会动，并且适应屏幕。</li>
+</ul>
+<h3 id="滚动监听（快要胜利了啊）"><a href="#滚动监听（快要胜利了啊）" class="headerlink" title="滚动监听（快要胜利了啊）"></a>滚动监听（快要胜利了啊）</h3><p>只要在附加导航的基础上，再在body上声明滚动监听属性，就可以实现滚动监听了。。。。。。额。。。just like that.oh my gold…<br>还是要写出滚动监听的 自定义属性的样子的 ： data-spy=”scroll” data-target=”#ID”..</p>
+<h3 id="好吧-到此结束，该吃饭的吃饭，该睡觉的睡觉，大家伙都散了吧，没听尽兴的明儿再来，我也真够啰嗦的。。。"><a href="#好吧-到此结束，该吃饭的吃饭，该睡觉的睡觉，大家伙都散了吧，没听尽兴的明儿再来，我也真够啰嗦的。。。" class="headerlink" title="好吧~~到此结束，该吃饭的吃饭，该睡觉的睡觉，大家伙都散了吧，没听尽兴的明儿再来，我也真够啰嗦的。。。"></a>好吧~~到此结束，该吃饭的吃饭，该睡觉的睡觉，大家伙都散了吧，没听尽兴的明儿再来，我也真够啰嗦的。。。</h3><p>来一款小游戏放松一下<a href="/myWorks/2048/2048.html">2048</a></p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2016/09/29/bootstrap学习之插件/">bootstrap学习之插件</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">Mr stone</a></p>
+        <p><span>发布时间:</span>2016-09-29, 09:50:31</p>
+        <p><span>最后更新:</span>2016-10-03, 22:44:39</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2016/09/29/bootstrap学习之插件/" title="bootstrap学习之插件">http://xiaoyi00112.github.io/2016/09/29/bootstrap学习之插件/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://xiaoyi00112.github.io/2016/09/29/bootstrap学习之插件/　　作者: Mr stone" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/2016/10/13/hello-world/">
+                    Hello World
+                </a>
+            </div>
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2016/09/28/bootstrap学习之组件/">
+                    bootstrap学习之组件
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#概述"><span class="toc-number">1.</span> <span class="toc-text">概述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#下拉菜单"><span class="toc-number">2.</span> <span class="toc-text">下拉菜单</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#标签页"><span class="toc-number">3.</span> <span class="toc-text">标签页</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#警告框"><span class="toc-number">4.</span> <span class="toc-text">警告框</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#工具提示、弹出框和摸态框"><span class="toc-number">5.</span> <span class="toc-text">工具提示、弹出框和摸态框</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Collapse折叠效果"><span class="toc-number">6.</span> <span class="toc-text">Collapse折叠效果</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Carousel广告轮播。旋转木马"><span class="toc-number">7.</span> <span class="toc-text">Carousel广告轮播。旋转木马</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Affix附加导航"><span class="toc-number">8.</span> <span class="toc-text">Affix附加导航</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#滚动监听（快要胜利了啊）"><span class="toc-number">9.</span> <span class="toc-text">滚动监听（快要胜利了啊）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#好吧-到此结束，该吃饭的吃饭，该睡觉的睡觉，大家伙都散了吧，没听尽兴的明儿再来，我也真够啰嗦的。。。"><span class="toc-number">10.</span> <span class="toc-text">好吧~~到此结束，该吃饭的吃饭，该睡觉的睡觉，大家伙都散了吧，没听尽兴的明儿再来，我也真够啰嗦的。。。</span></a></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"bootstrap学习之插件　| hexo姣小屋　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+      <div class="duoshuo" id="comments">
+    <div id="comment-box" ></div>
+    <div class="ds-thread" id="ds-thread" data-thread-key="2016/09/29/bootstrap学习之插件/" data-title="bootstrap学习之插件" data-url="http://xiaoyi00112.github.io/2016/09/29/bootstrap学习之插件/"></div>
+    <script>
+        var duoshuoQuery = {short_name:"xiaoyi00112"};
+        var loadComment = function(){
+            var d = document, s = d.createElement('script');
+            s.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+            s.async = true; s.charset = 'UTF-8';
+            (d.head || d.body).appendChild(s);
+        }
+
+        
+    </script>
+    
+    <script> loadComment(); </script>
+
+</div>
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2016/10/13/hello-world/" title="上一篇: Hello World">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2016/09/28/bootstrap学习之组件/" title="下一篇: bootstrap学习之组件">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/10/13/hello-world/">Hello World</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/29/bootstrap学习之插件/">bootstrap学习之插件</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/28/bootstrap学习之组件/">bootstrap学习之组件</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/27/bootstrap学习之起步/">bootstrap学习之起步</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/27/Markdown语法总结1/">Markdown语法总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/26/BUG汇总/">BUG汇总</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/22/思考的重要性/">思考的重要性</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/21/第一篇博客/">第一篇博客</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/21/hello-my-honey-jiaojiao/">hello my honey jiaojiao</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2016 Mr stone
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>| </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit"  title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 5;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+            
+            
+            
+            
+            
+            
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
+</html>
