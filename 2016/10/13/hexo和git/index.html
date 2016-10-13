@@ -15,15 +15,16 @@
 
 
 
-<meta name="description" content="记录进步的点点滴滴">
-<meta property="og:type" content="website">
-<meta property="og:title" content="hexo姣小屋">
-<meta property="og:url" content="http://xiaoyi00112.github.io/archives/2016/09/index.html">
+<meta name="description" content="自从入了hexo这个坑之后，享受了诸多甜头，也踩了无数的坑，几天吧踩过的坑来总结一下。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="hexo建立博客，git上传到远成仓库">
+<meta property="og:url" content="http://xiaoyi00112.github.io/2016/10/13/hexo和git/index.html">
 <meta property="og:site_name" content="hexo姣小屋">
-<meta property="og:description" content="记录进步的点点滴滴">
+<meta property="og:description" content="自从入了hexo这个坑之后，享受了诸多甜头，也踩了无数的坑，几天吧踩过的坑来总结一下。">
+<meta property="og:updated_time" content="2016-10-13T09:42:42.387Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="hexo姣小屋">
-<meta name="twitter:description" content="记录进步的点点滴滴">
+<meta name="twitter:title" content="hexo建立博客，git上传到远成仓库">
+<meta name="twitter:description" content="自从入了hexo这个坑之后，享受了诸多甜头，也踩了无数的坑，几天吧踩过的坑来总结一下。">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -55,7 +56,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>Archives: 2016/9 | hexo姣小屋</title>
+<title>hexo建立博客，git上传到远成仓库 | hexo姣小屋</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -65,8 +66,8 @@
         fancybox: true,
         animate: true,
         isHome: false,
-        isPost: false,
-        isArchive: true,
+        isPost: true,
+        isArchive: false,
         isTag: false,
         isCategory: false,
         fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
@@ -263,208 +264,223 @@
     </div>
     <link class="menu-list" tags="Tags" friends="Friends" about="About Me"/>
 </nav>
-      <div class="body-wrap">
+      <div class="body-wrap"><article id="post-hexo和git" class="article article-type-post" itemscope itemprop="blogPost">
   
+    <div class="article-meta">
+      <a href="/2016/10/13/hexo和git/" class="article-date">
+      <time datetime="2016-10-13T01:50:31.000Z" itemprop="datePublished">2016-10-13</time>
+</a>
+
+
+    </div>
   
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
     
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      hexo建立博客，git上传到远成仓库
+    </h1>
+  
+
+      </header>
       
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/hexo/">hexo</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/">hexo</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2016" class="archive-year">2016</a>
-        </div>
-        <div class="archives">
     
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-          <div class="article-meta">
-              <a href="/2016/09/29/bootstrap学习之插件/" class="archive-article-date">
-      <time datetime="2016-09-29T01:50:31.000Z" itemprop="datePublished">09-29</time>
-</a>
-
-
-        </div>
-         
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/09/29/bootstrap学习之插件/">bootstrap学习之插件</a>
-    </h1>
-  
-
-        <div class="article-info info-on-archive">
+    <div class="article-entry" itemprop="articleBody">
+      
           
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/前端/">前端</a>
+        <p>自从入了hexo这个坑之后，享受了诸多甜头，也踩了无数的坑，几天吧踩过的坑来总结一下。<br><a id="more"></a><br>话说今天的hexo又踩了一个坑，本来想把自己写好的项目直接deploy到hexo中，但是，不知为何js代码总是出错，于是乎，我直接在git上更改了代码，结果就碰到了地雷，在hexo d代码的时候总是d不上，问了度娘好久，还是没有找到原因。心一横，备份一下配置文件，Ctrl+a，再shift+delete+enter。OK，这个故事才刚刚开始。  </p>
+<h3 id="hexo的安装"><a href="#hexo的安装" class="headerlink" title="hexo的安装"></a>hexo的安装</h3><pre><code>1. npm install -g hexo-cli
+</code></pre><p>然后开始初始化hexo</p>
+<pre><code>2. hexo init  
+3. npm install
+</code></pre><p>做完这两步就初始化好了，然后的步骤要小心,首先生成静态页面。</p>
+<pre><code>4. hexo g
+</code></pre><p>然后创建远程主机仓库，就是在你的github上建立一个新仓库仓库名字的规则是：</p>
+<pre><code>仓库的名称 = 你注册的昵称 + github.io
+</code></pre><p>然后重要的一步来了，一定要执行以下这个代码，否则hexo d 有时会报错</p>
+<pre><code>npm install hexo-deployer-git --save
+</code></pre><p>如何配置_config.yml文件这里就不多说了。然后就往github上deploy就行了</p>
+<pre><code>hexo d
+</code></pre><p>OK，再把自己的配置文件弄回来，终于好了。</p>
+<h3 id="git上传到远成仓库"><a href="#git上传到远成仓库" class="headerlink" title="git上传到远成仓库"></a>git上传到远成仓库</h3><p>首先关联你的远成仓库：</p>
+<pre><code>git remote add origin git@server-name:path/repo-name.git
+</code></pre><p>如果远程仓库有内容，就先pull一下,这样能够保证远成仓库里的东西，本地仓库都有，并且千万注意，远成仓库需要有README.md</p>
+<pre><code>git pull
+</code></pre><p>然后添加你本地仓库里的文件。如果太多就选择一下都添加：</p>
+<pre><code>git add -A
+</code></pre><p>然后提交</p>
+<pre><code>git commit -m &apos;文件修改的描述&apos;
+</code></pre><p>然后就可以push了,第一次push一般使用</p>
+<pre><code>git push -u origin master
+</code></pre><p>之后的平时就可以使用</p>
+<pre><code>git push origin master
+</code></pre><h3 id="展示自己的作品"><a href="#展示自己的作品" class="headerlink" title="展示自己的作品"></a>展示自己的作品</h3><p>自己的作品push到github上之后，就可以用github的HTML Preview对你写的页面进行view，下面是地址，经常找这个地址</p>
+<pre><code>http://htmlpreview.github.io/?
+</code></pre><p>然后你view结果得地址，就是你展示作品的地址了。可以写在文章的Markdown链接里面，就可以连接到你的地址了。</p>
+
+      
     </div>
-
-
-          
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/bootstrap/">bootstrap</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/前端/">前端</a></li></ul>
-    </div>
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
+    
   </div>
-</article>
   
     
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-          <div class="article-meta">
-              <a href="/2016/09/28/bootstrap学习之组件/" class="archive-article-date">
-      <time datetime="2016-09-28T05:50:31.000Z" itemprop="datePublished">09-28</time>
-</a>
-
-
-        </div>
-         
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/09/28/bootstrap学习之组件/">bootstrap学习之组件</a>
-    </h1>
-  
-
-        <div class="article-info info-on-archive">
-          
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/前端/">前端</a>
+    <div class="copyright">
+        <p><span>Title:</span><a href="/2016/10/13/hexo和git/">hexo建立博客，git上传到远成仓库</a></p>
+        <p><span>Author:</span><a href="/" title="Back to Homepage">Mr stone</a></p>
+        <p><span>Created:</span>2016-10-13, 09:50:31</p>
+        <p><span>Updated:</span>2016-10-13, 17:42:42</p>
+        <p>
+            <span>Full URL:</span><a class="post-url" href="/2016/10/13/hexo和git/" title="hexo建立博客，git上传到远成仓库">http://xiaoyi00112.github.io/2016/10/13/hexo和git/</a>
+            <span class="copy-path" data-clipboard-text="From http://xiaoyi00112.github.io/2016/10/13/hexo和git/　　By Mr stone" title="Copy Article&#39;s Link &amp; Author"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>License:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"CC BY-NC-SA 4.0"</a> Keep Link &amp; Author if Distribute.
+        </p>
     </div>
 
 
-          
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/bootstrap/">bootstrap</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/前端/">前端</a></li></ul>
-    </div>
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-          <div class="article-meta">
-              <a href="/2016/09/27/bootstrap学习之起步/" class="archive-article-date">
-      <time datetime="2016-09-27T08:50:31.000Z" itemprop="datePublished">09-27</time>
-</a>
-
-
-        </div>
-         
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/09/27/bootstrap学习之起步/">bootstrap学习之起步</a>
-    </h1>
-  
-
-        <div class="article-info info-on-archive">
-          
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/前端/">前端</a>
-    </div>
-
-
-          
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/bootstrap/">bootstrap</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/前端/">前端</a></li></ul>
-    </div>
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-          <div class="article-meta">
-              <a href="/2016/09/27/Markdown语法总结1/" class="archive-article-date">
-      <time datetime="2016-09-27T04:02:02.000Z" itemprop="datePublished">09-27</time>
-</a>
-
-
-        </div>
-         
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/09/27/Markdown语法总结1/">Markdown语法总结</a>
-    </h1>
-  
-
-        <div class="article-info info-on-archive">
-          
-
-          
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Markdown语法/">Markdown语法</a></li></ul>
-    </div>
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-          <div class="article-meta">
-              <a href="/2016/09/26/BUG汇总/" class="archive-article-date">
-      <time datetime="2016-09-26T01:50:31.000Z" itemprop="datePublished">09-26</time>
-</a>
-
-
-        </div>
-         
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/09/26/BUG汇总/">BUG汇总</a>
-    </h1>
-  
-
-        <div class="article-info info-on-archive">
-          
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/前端/">前端</a>
-    </div>
-
-
-          
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/BUG/">BUG</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/前端/">前端</a></li></ul>
-    </div>
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
-    <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/archives/2016/09/page/2/">2</a><a class="extend next" rel="next" href="/archives/2016/09/page/2/">Next &raquo;</a>
+    <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/2016/10/13/hello-world/">
+                    Hello World
+                </a>
+            </div>
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2016/09/29/bootstrap学习之插件/">
+                    bootstrap学习之插件
+                </a>
+            </div>
+        
     </nav>
-  
 
+  
+</article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">Contents</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#hexo的安装"><span class="toc-number">1.</span> <span class="toc-text">hexo的安装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#git上传到远成仓库"><span class="toc-number">2.</span> <span class="toc-text">git上传到远成仓库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#展示自己的作品"><span class="toc-number">3.</span> <span class="toc-text">展示自己的作品</span></a></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="Hide"  title="Show or Hide Table of Contents">
+
+    <script>
+        yiliaConfig.toc = ["Hide", "Show", !!"false"];
+    </script>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"hexo建立博客，git上传到远成仓库　| hexo姣小屋　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+      <div class="duoshuo" id="comments">
+    <div id="comment-box" ></div>
+    <div class="ds-thread" id="ds-thread" data-thread-key="2016/10/13/hexo和git/" data-title="hexo建立博客，git上传到远成仓库" data-url="http://xiaoyi00112.github.io/2016/10/13/hexo和git/"></div>
+    <script>
+        var duoshuoQuery = {short_name:"xiaoyi00112"};
+        var loadComment = function(){
+            var d = document, s = d.createElement('script');
+            s.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+            s.async = true; s.charset = 'UTF-8';
+            (d.head || d.body).appendChild(s);
+        }
+
+        
+    </script>
+    
+    <script> loadComment(); </script>
+
+</div>
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2016/10/13/hello-world/" title="Pre: Hello World">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="Mini Archives"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2016/09/29/bootstrap学习之插件/" title="Next: bootstrap学习之插件">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/10/13/hello-world/">Hello World</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/13/hexo和git/">hexo建立博客，git上传到远成仓库</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/29/bootstrap学习之插件/">bootstrap学习之插件</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/28/bootstrap学习之组件/">bootstrap学习之组件</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/27/bootstrap学习之起步/">bootstrap学习之起步</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/27/Markdown语法总结1/">Markdown语法总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/26/BUG汇总/">BUG汇总</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/22/思考的重要性/">思考的重要性</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/21/第一篇博客/">第一篇博客</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/21/hello-my-honey-jiaojiao/">hello my honey jiaojiao</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
 </div>
       <footer id="footer">
     <div class="outer">
