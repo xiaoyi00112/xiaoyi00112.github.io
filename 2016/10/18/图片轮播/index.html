@@ -15,15 +15,16 @@
 
 
 
-<meta name="description" content="记录进步的点点滴滴">
-<meta property="og:type" content="website">
-<meta property="og:title" content="hexo姣小屋">
-<meta property="og:url" content="http://xiaoyi00112.github.io/categories/前端/index.html">
+<meta name="description" content="今天来说说图片轮播那点事。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="BUG汇总">
+<meta property="og:url" content="http://xiaoyi00112.github.io/2016/10/18/图片轮播/index.html">
 <meta property="og:site_name" content="hexo姣小屋">
-<meta property="og:description" content="记录进步的点点滴滴">
+<meta property="og:description" content="今天来说说图片轮播那点事。">
+<meta property="og:updated_time" content="2016-10-18T02:54:21.586Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="hexo姣小屋">
-<meta name="twitter:description" content="记录进步的点点滴滴">
+<meta name="twitter:title" content="BUG汇总">
+<meta name="twitter:description" content="今天来说说图片轮播那点事。">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -55,7 +56,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>Category: 前端 | hexo姣小屋</title>
+<title>BUG汇总 | hexo姣小屋</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -65,10 +66,10 @@
         fancybox: true,
         animate: true,
         isHome: false,
-        isPost: false,
+        isPost: true,
         isArchive: false,
         isTag: false,
-        isCategory: true,
+        isCategory: false,
         fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
         scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
         search: undefined
@@ -263,208 +264,203 @@
     </div>
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
-      <div class="body-wrap">
+      <div class="body-wrap"><article id="post-图片轮播" class="article article-type-post" itemscope itemprop="blogPost">
   
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2016" class="archive-year">2016</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-          <div class="article-meta">
-              <a href="/2016/10/18/图片轮播/" class="archive-article-date">
-      <time datetime="2016-10-18T02:50:31.000Z" itemprop="datePublished">10-18</time>
+    <div class="article-meta">
+      <a href="/2016/10/18/图片轮播/" class="article-date">
+      <time datetime="2016-10-18T02:50:31.000Z" itemprop="datePublished">2016-10-18</time>
 </a>
 
 
-        </div>
-         
+    </div>
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/10/18/图片轮播/">BUG汇总</a>
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      BUG汇总
     </h1>
   
 
-        <div class="article-info info-on-archive">
-          
+      </header>
+      
+      <div class="article-info article-info-post">
+        
     <div class="article-category tagcloud">
     <a class="article-category-link" href="/categories/前端/">前端</a>
     </div>
 
 
-          
+        
     <div class="article-tag tagcloud">
         <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/前端/">前端</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/图片轮播/">图片轮播</a></li></ul>
     </div>
 
-        </div>
         <div class="clearfix"></div>
-    </header>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h2 id="今天来说说图片轮播那点事。"><a href="#今天来说说图片轮播那点事。" class="headerlink" title="今天来说说图片轮播那点事。"></a>今天来说说图片轮播那点事。</h2><a id="more"></a>
+<p>图片轮播是在建设网站中重要的一环，以前接触过一种图片轮播模式是在html页面中不断创建新元素，这对于刚入门的童鞋来说，简直是满天星有木有。在痛苦的摸索中终于在慕课上找到了一个相当不错的解决方案，很巧妙的解决了焦点轮播的解决并作了一定的优化。这里是视频教程的地址<a href="http://www.imooc.com/learn/18" target="_blank" rel="external">焦点图轮播特效</a>.<br>下面来说下我学到的焦点轮播图中主要的解决方案。焦点轮播图主要需要解决的问题其实有下面这几个</p>
+<ol>
+<li>用什么方式改变图片的位置。</li>
+<li>怎么让图片无限向一个方向滚动。</li>
+<li>如何实现鼠标点击箭头切换图片事件</li>
+<li>如何点击切换按钮切换图片</li>
+</ol>
+<p>首先是第一个问题，解决方法是使图片一字排开，然后给父元素设置relative定位，overflow为hidden，然后改变父元素left值来实现图片滚动。<br>这是几个主要需要解决的问题。其中最主要困扰我的问题是怎么让图片无限向一个方向滚动的时间。这里的解决方案是，在最后一张图片之后放上第一张图片，第一张图片之前放一张最后一张图片，也就是ZA**ZA的顺序，在26个字母的A前面放上最后的Z，在Z的后面放一个A。<br>然后在滚动到最后一张图片(Z)的时候，再往后滚动，会滚动到它后面放置的(A)那张图片之上，然后在滚动完毕后做一个判断，如果滚动超过了最后一张图片(Z)的位置，并目前已经滚动到了(Z)后面(A)的位置，那么把left值重置到真正（A）的位置。向前移动原理一致。  </p>
+<p>然后下面是制作轮播图的步骤。</p>
+<ol>
+<li>制作左右箭头的点击事件</li>
+<li>焦点无限滚动事件</li>
+<li>焦点图轮播按钮切换</li>
+<li>焦点轮播图的动画，其中动画最重要的一个判断就是：(step&gt;0 &amp;&amp; nowLeft<newleft) ||="" (step<0="" &&="" nowleft="">newLeft)。</newleft)></li>
+<li>轮播图自动播放。</li>
+</ol>
+
+      
+    </div>
+    
   </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2016/10/18/图片轮播/">BUG汇总</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">Mr stone</a></p>
+        <p><span>发布时间:</span>2016-10-18, 10:50:31</p>
+        <p><span>最后更新:</span>2016-10-18, 10:54:21</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2016/10/18/图片轮播/" title="BUG汇总">http://xiaoyi00112.github.io/2016/10/18/图片轮播/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://xiaoyi00112.github.io/2016/10/18/图片轮播/　　作者: Mr stone" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2016/10/13/hexo和git/">
+                    hexo建立博客，git上传到远成仓库
+                </a>
+            </div>
+        
+    </nav>
+
+  
 </article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-          <div class="article-meta">
-              <a href="/2016/09/29/bootstrap学习之插件/" class="archive-article-date">
-      <time datetime="2016-09-29T01:50:31.000Z" itemprop="datePublished">09-29</time>
-</a>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#今天来说说图片轮播那点事。"><span class="toc-number">1.</span> <span class="toc-text">今天来说说图片轮播那点事。</span></a></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
 
 
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
         </div>
-         
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/09/29/bootstrap学习之插件/">bootstrap学习之插件</a>
-    </h1>
-  
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"BUG汇总　| hexo姣小屋　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
 
-        <div class="article-info info-on-archive">
-          
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/前端/">前端</a>
+    
+</div>
+
+
+
+
+
+
+
+    
+      <div class="duoshuo" id="comments">
+    <div id="comment-box" ></div>
+    <div class="ds-thread" id="ds-thread" data-thread-key="2016/10/18/图片轮播/" data-title="BUG汇总" data-url="http://xiaoyi00112.github.io/2016/10/18/图片轮播/"></div>
+    <script>
+        var duoshuoQuery = {short_name:"xiaoyi00112"};
+        var loadComment = function(){
+            var d = document, s = d.createElement('script');
+            s.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+            s.async = true; s.charset = 'UTF-8';
+            (d.head || d.body).appendChild(s);
+        }
+
+        
+    </script>
+    
+    <script> loadComment(); </script>
+
+</div>
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2016/10/13/hexo和git/" title="下一篇: hexo建立博客，git上传到远成仓库">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
     </div>
 
-
-          
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/bootstrap/">bootstrap</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/前端/">前端</a></li></ul>
-    </div>
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-          <div class="article-meta">
-              <a href="/2016/09/28/bootstrap学习之组件/" class="archive-article-date">
-      <time datetime="2016-09-28T05:50:31.000Z" itemprop="datePublished">09-28</time>
-</a>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/10/18/图片轮播/">BUG汇总</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/13/hexo和git/">hexo建立博客，git上传到远成仓库</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/29/bootstrap学习之插件/">bootstrap学习之插件</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/28/bootstrap学习之组件/">bootstrap学习之组件</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/27/bootstrap学习之起步/">bootstrap学习之起步</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/27/Markdown语法总结1/">Markdown语法总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/26/BUG汇总/">BUG汇总</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/22/思考的重要性/">思考的重要性</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/21/第一篇博客/">第一篇博客</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/21/hello-my-honey-jiaojiao/">hello my honey jiaojiao</a></li></ul>
 
 
-        </div>
-         
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/09/28/bootstrap学习之组件/">bootstrap学习之组件</a>
-    </h1>
-  
-
-        <div class="article-info info-on-archive">
-          
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/前端/">前端</a>
-    </div>
 
 
-          
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/bootstrap/">bootstrap</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/前端/">前端</a></li></ul>
-    </div>
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-          <div class="article-meta">
-              <a href="/2016/09/27/bootstrap学习之起步/" class="archive-article-date">
-      <time datetime="2016-09-27T08:50:31.000Z" itemprop="datePublished">09-27</time>
-</a>
-
-
-        </div>
-         
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/09/27/bootstrap学习之起步/">bootstrap学习之起步</a>
-    </h1>
-  
-
-        <div class="article-info info-on-archive">
-          
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/前端/">前端</a>
-    </div>
-
-
-          
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/bootstrap/">bootstrap</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/前端/">前端</a></li></ul>
-    </div>
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-          <div class="article-meta">
-              <a href="/2016/09/26/BUG汇总/" class="archive-article-date">
-      <time datetime="2016-09-26T01:50:31.000Z" itemprop="datePublished">09-26</time>
-</a>
-
-
-        </div>
-         
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/09/26/BUG汇总/">BUG汇总</a>
-    </h1>
-  
-
-        <div class="article-info info-on-archive">
-          
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/前端/">前端</a>
-    </div>
-
-
-          
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/BUG/">BUG</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/前端/">前端</a></li></ul>
-    </div>
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
-
+    <script>
+        
+    </script>
 </div>
       <footer id="footer">
     <div class="outer">
