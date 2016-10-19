@@ -15,15 +15,16 @@
 
 
 
-<meta name="description" content="记录进步的点点滴滴">
-<meta property="og:type" content="website">
-<meta property="og:title" content="hexo姣小屋">
-<meta property="og:url" content="http://xiaoyi00112.github.io/tags/hexo/index.html">
+<meta name="description" content="toSting思考的由来相信很多人用过Object.prototype.toString.call();这个很神奇的方法吧，我也总是拿来用，但是对于其中的原理总是一知半解的，其中最重要的一点就是为什么所有函数都有toString方法，但是toString出来的东西都不一样呢。发现了这个问题之后的东西就简单了，经查看手册发现，该方法是Object的方法，而且所有对象都“继承”了Object的这个方法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="关于toString函数。">
+<meta property="og:url" content="http://xiaoyi00112.github.io/2016/10/19/toString函数/index.html">
 <meta property="og:site_name" content="hexo姣小屋">
-<meta property="og:description" content="记录进步的点点滴滴">
+<meta property="og:description" content="toSting思考的由来相信很多人用过Object.prototype.toString.call();这个很神奇的方法吧，我也总是拿来用，但是对于其中的原理总是一知半解的，其中最重要的一点就是为什么所有函数都有toString方法，但是toString出来的东西都不一样呢。发现了这个问题之后的东西就简单了，经查看手册发现，该方法是Object的方法，而且所有对象都“继承”了Object的这个方法">
+<meta property="og:updated_time" content="2016-10-19T11:12:30.408Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="hexo姣小屋">
-<meta name="twitter:description" content="记录进步的点点滴滴">
+<meta name="twitter:title" content="关于toString函数。">
+<meta name="twitter:description" content="toSting思考的由来相信很多人用过Object.prototype.toString.call();这个很神奇的方法吧，我也总是拿来用，但是对于其中的原理总是一知半解的，其中最重要的一点就是为什么所有函数都有toString方法，但是toString出来的东西都不一样呢。发现了这个问题之后的东西就简单了，经查看手册发现，该方法是Object的方法，而且所有对象都“继承”了Object的这个方法">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -55,7 +56,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>Tag: hexo | hexo姣小屋</title>
+<title>关于toString函数。 | hexo姣小屋</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -65,9 +66,9 @@
         fancybox: true,
         animate: true,
         isHome: false,
-        isPost: false,
+        isPost: true,
         isArchive: false,
-        isTag: true,
+        isTag: false,
         isCategory: false,
         fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
         scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
@@ -265,60 +266,223 @@
     </div>
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
-      <div class="body-wrap">
+      <div class="body-wrap"><article id="post-toString函数" class="article article-type-post" itemscope itemprop="blogPost">
   
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2016" class="archive-year">2016</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-          <div class="article-meta">
-              <a href="/2016/10/13/hexo和git/" class="archive-article-date">
-      <time datetime="2016-10-13T01:50:31.000Z" itemprop="datePublished">10-13</time>
+    <div class="article-meta">
+      <a href="/2016/10/19/toString函数/" class="article-date">
+      <time datetime="2016-10-19T10:50:31.000Z" itemprop="datePublished">2016-10-19</time>
 </a>
 
 
-        </div>
-         
+    </div>
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/10/13/hexo和git/">hexo建立博客，git上传到远成仓库</a>
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      关于toString函数。
     </h1>
   
 
-        <div class="article-info info-on-archive">
-          
+      </header>
+      
+      <div class="article-info article-info-post">
+        
     <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/hexo/">hexo</a>
+    <a class="article-category-link" href="/categories/前端/">前端</a>
     </div>
 
 
-          
+        
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/">hexo</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/前端/">前端</a></li></ul>
     </div>
 
-        </div>
         <div class="clearfix"></div>
-    </header>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h3 id="toSting思考的由来"><a href="#toSting思考的由来" class="headerlink" title="toSting思考的由来"></a>toSting思考的由来</h3><p>相信很多人用过Object.prototype.toString.call();这个很神奇的方法吧，我也总是拿来用，但是对于其中的原理总是一知半解的，其中最重要的一点就是为什么所有函数都有toString方法，但是toString出来的东西都不一样呢。<br>发现了这个问题之后的东西就简单了，经查看手册发现，该方法是Object的方法，而且所有对象都“继承”了Object的这个方法，但是几乎所有实例对象（就是Array、Boolean。。）都对这个方法进行了重写，来实现自身功能的需要。</p>
+<a id="more"></a>
+<h3 id="下面是个函数对toString的复写。"><a href="#下面是个函数对toString的复写。" class="headerlink" title="下面是个函数对toString的复写。"></a>下面是个函数对toString的复写。</h3><table>
+<thead>
+<tr>
+<th style="text-align:left">类型</th>
+<th style="text-align:left">行为描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Array</td>
+<td style="text-align:left">将 Array 的每个元素转换为字符串，并将它们依次连接起来，两个元素之间用英文逗号作为分隔符进行拼接。</td>
+</tr>
+<tr>
+<td style="text-align:left">Boolean</td>
+<td style="text-align:left">如果布尔值是true，则返回”true”。否则返回”false”。</td>
+</tr>
+<tr>
+<td style="text-align:left">Error</td>
+<td style="text-align:left">返回如下格式的字符串，其中 functionname 是一个函数的名称，此函数的 toString 方法被调用： “function functionname() { [native code] }”</td>
+</tr>
+<tr>
+<td style="text-align:left">Number</td>
+<td style="text-align:left">返回数值的字符串表示。还可返回以指定进制表示的字符串，请参考Number.toString()。</td>
+</tr>
+<tr>
+<td style="text-align:left">String</td>
+<td style="text-align:left">返回 String 对象的值。</td>
+</tr>
+<tr>
+<td style="text-align:left">Object(默认)</td>
+<td style="text-align:left">返回”[object ObjectName]”，其中 ObjectName 是对象类型的名称。</td>
+</tr>
+</tbody>
+</table>
+<p>有了如上所示对toString方法在各个实例对象的实现方法知识之后，就不难理解为什么Object.prototype.toString.call();在括号里传入一个数组为什么不返回整个数组对象，而是反悔了”[Object,Array]”了。</p>
+
+      
+    </div>
+    
   </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2016/10/19/toString函数/">关于toString函数。</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">Mr stone</a></p>
+        <p><span>发布时间:</span>2016-10-19, 18:50:31</p>
+        <p><span>最后更新:</span>2016-10-19, 19:12:30</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2016/10/19/toString函数/" title="关于toString函数。">http://xiaoyi00112.github.io/2016/10/19/toString函数/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://xiaoyi00112.github.io/2016/10/19/toString函数/　　作者: Mr stone" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2016/10/18/图片轮播/">
+                    图片轮播
+                </a>
+            </div>
+        
+    </nav>
+
+  
 </article>
-  
-  
-    </div></section>
-  
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#toSting思考的由来"><span class="toc-number">1.</span> <span class="toc-text">toSting思考的由来</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#下面是个函数对toString的复写。"><span class="toc-number">2.</span> <span class="toc-text">下面是个函数对toString的复写。</span></a></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
 
     
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"关于toString函数。　| hexo姣小屋　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
 
+    
+</div>
+
+
+
+
+
+
+
+    
+      <div class="duoshuo" id="comments">
+    <div id="comment-box" ></div>
+    <div class="ds-thread" id="ds-thread" data-thread-key="2016/10/19/toString函数/" data-title="关于toString函数。" data-url="http://xiaoyi00112.github.io/2016/10/19/toString函数/"></div>
+    <script>
+        var duoshuoQuery = {short_name:"xiaoyi00112"};
+        var loadComment = function(){
+            var d = document, s = d.createElement('script');
+            s.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+            s.async = true; s.charset = 'UTF-8';
+            (d.head || d.body).appendChild(s);
+        }
+
+        
+    </script>
+    
+    <script> loadComment(); </script>
+
+</div>
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2016/10/18/图片轮播/" title="下一篇: 图片轮播">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/10/19/toString函数/">关于toString函数。</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/18/图片轮播/">图片轮播</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/13/hexo和git/">hexo建立博客，git上传到远成仓库</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/29/bootstrap学习之插件/">bootstrap学习之插件</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/28/bootstrap学习之组件/">bootstrap学习之组件</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/27/bootstrap学习之起步/">bootstrap学习之起步</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/27/Markdown语法总结1/">Markdown语法总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/26/BUG汇总/">BUG汇总</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/22/思考的重要性/">思考的重要性</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/21/第一篇博客/">第一篇博客</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/21/hello-my-honey-jiaojiao/">hello my honey jiaojiao</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
 </div>
       <footer id="footer">
     <div class="outer">
