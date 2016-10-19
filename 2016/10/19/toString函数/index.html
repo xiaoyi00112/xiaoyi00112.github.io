@@ -21,7 +21,7 @@
 <meta property="og:url" content="http://xiaoyi00112.github.io/2016/10/19/toString函数/index.html">
 <meta property="og:site_name" content="hexo姣小屋">
 <meta property="og:description" content="toSting思考的由来相信很多人用过Object.prototype.toString.call();这个很神奇的方法吧，我也总是拿来用，但是对于其中的原理总是一知半解的，其中最重要的一点就是为什么所有函数都有toString方法，但是toString出来的东西都不一样呢。发现了这个问题之后的东西就简单了，经查看手册发现，该方法是Object的方法，而且所有对象都“继承”了Object的这个方法">
-<meta property="og:updated_time" content="2016-10-19T11:12:30.408Z">
+<meta property="og:updated_time" content="2016-10-19T11:23:44.499Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="关于toString函数。">
 <meta name="twitter:description" content="toSting思考的由来相信很多人用过Object.prototype.toString.call();这个很神奇的方法吧，我也总是拿来用，但是对于其中的原理总是一知半解的，其中最重要的一点就是为什么所有函数都有toString方法，但是toString出来的东西都不一样呢。发现了这个问题之后的东西就简单了，经查看手册发现，该方法是Object的方法，而且所有对象都“继承”了Object的这个方法">
@@ -347,6 +347,9 @@
 </tbody>
 </table>
 <p>有了如上所示对toString方法在各个实例对象的实现方法知识之后，就不难理解为什么Object.prototype.toString.call();在括号里传入一个数组为什么不返回整个数组对象，而是反悔了”[Object,Array]”了。</p>
+<blockquote>
+<p>参考文献:<br><a href="http://www.365mini.com/page/javascript-tostring.htm" target="_blank" rel="external">JavaScript toString() 函数详解</a></p>
+</blockquote>
 
       
     </div>
@@ -358,7 +361,7 @@
         <p><span>本文标题:</span><a href="/2016/10/19/toString函数/">关于toString函数。</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">Mr stone</a></p>
         <p><span>发布时间:</span>2016-10-19, 18:50:31</p>
-        <p><span>最后更新:</span>2016-10-19, 19:12:30</p>
+        <p><span>最后更新:</span>2016-10-19, 19:23:44</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2016/10/19/toString函数/" title="关于toString函数。">http://xiaoyi00112.github.io/2016/10/19/toString函数/</a>
             <span class="copy-path" data-clipboard-text="原文: http://xiaoyi00112.github.io/2016/10/19/toString函数/　　作者: Mr stone" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
