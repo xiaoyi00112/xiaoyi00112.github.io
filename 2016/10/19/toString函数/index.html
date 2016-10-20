@@ -21,7 +21,7 @@
 <meta property="og:url" content="http://xiaoyi00112.github.io/2016/10/19/toString函数/index.html">
 <meta property="og:site_name" content="hexo姣小屋">
 <meta property="og:description" content="toSting思考的由来相信很多人用过Object.prototype.toString.call();这个很神奇的方法吧，我也总是拿来用，但是对于其中的原理总是一知半解的，其中最重要的一点就是为什么所有函数都有toString方法，但是toString出来的东西都不一样呢。发现了这个问题之后的东西就简单了，经查看手册发现，该方法是Object的方法，而且所有对象都“继承”了Object的这个方法">
-<meta property="og:updated_time" content="2016-10-19T11:23:44.499Z">
+<meta property="og:updated_time" content="2016-10-20T02:25:57.829Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="关于toString函数。">
 <meta name="twitter:description" content="toSting思考的由来相信很多人用过Object.prototype.toString.call();这个很神奇的方法吧，我也总是拿来用，但是对于其中的原理总是一知半解的，其中最重要的一点就是为什么所有函数都有toString方法，但是toString出来的东西都不一样呢。发现了这个问题之后的东西就简单了，经查看手册发现，该方法是Object的方法，而且所有对象都“继承”了Object的这个方法">
@@ -185,7 +185,7 @@
                 
                 <section class="switch-part switch-part2">
                     <div class="widget tagcloud" id="js-tagcloud">
-                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/BUG/">BUG</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Markdown语法/">Markdown语法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bootstrap/">bootstrap</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前端/">前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/图片轮播/">图片轮播</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/随笔/">随笔</a></li></ul>
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/BUG/">BUG</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Markdown语法/">Markdown语法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bootstrap/">bootstrap</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/new/">new</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/this/">this</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/函数在内存中加载过程/">函数在内存中加载过程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前端/">前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/图片轮播/">图片轮播</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/构造函数/">构造函数</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/随笔/">随笔</a></li></ul>
                     </div>
                 </section>
                 
@@ -341,14 +341,28 @@
 <td style="text-align:left">返回 String 对象的值。</td>
 </tr>
 <tr>
+<td style="text-align:left">Window</td>
+<td style="text-align:left">返回”[object Window]”，</td>
+</tr>
+<tr>
 <td style="text-align:left">Object(默认)</td>
 <td style="text-align:left">返回”[object ObjectName]”，其中 ObjectName 是对象类型的名称。</td>
 </tr>
 </tbody>
 </table>
 <p>有了如上所示对toString方法在各个实例对象的实现方法知识之后，就不难理解为什么Object.prototype.toString.call();在括号里传入一个数组为什么不返回整个数组对象，而是反悔了”[Object,Array]”了。</p>
+<h3 id="下面是一个关联问题，那就是typeof。"><a href="#下面是一个关联问题，那就是typeof。" class="headerlink" title="下面是一个关联问题，那就是typeof。"></a>下面是一个关联问题，那就是typeof。</h3><p>为什么typeof(Function)是function，而typeof(new Array())是object呢？这是在让人有点不解，其实真正的原因就是因为function除了是个普通对象之外，还是一个<strong>构造器</strong>！！</p>
+<p>以下是引用片段： </p>
+<pre><code>alert(typeof(Function)));  
+alert(typeof(new Function()));  
+alert(typeof(Array));  
+alert(typeof(Object));  
+alert(typeof(new Array()));  
+alert(typeof(new Date()));  
+alert(typeof(new Object()));   
+</code></pre><p>运行这段代码可以发现：前面4条语句都会显示“function”，而后面3条语句则显示“object”，可见new一个function实际上是返回 一个函数。这与其他的对象有很大的不同。其他的类型Array、Object等都会通过new操作符返回一个普通对象。尽管函数本身也是一个对象，但它与 普通的对象还是有区别的，因为它同时也是对象构造器，也就是说，可以new一个函数来返回一个对象。所有typeof返回 “function”的对象都是函数对象。也称这样的对象为构造器（constructor），因而，所有的构造器都是对象，但不是所有的对象都是构造器。</p>
 <blockquote>
-<p>参考文献:<br><a href="http://www.365mini.com/page/javascript-tostring.htm" target="_blank" rel="external">JavaScript toString() 函数详解</a></p>
+<p>参考文献:<br><a href="http://www.365mini.com/page/javascript-tostring.htm" target="_blank" rel="external">JavaScript toString() 函数详解</a><br><a href="http://www.cnblogs.com/yuzhongwusan/archive/2012/04/09/2438569.html?from=singlemessage&amp;isappinstalled=0" target="_blank" rel="external">认识js中的function</a></p>
 </blockquote>
 
       
@@ -361,7 +375,7 @@
         <p><span>本文标题:</span><a href="/2016/10/19/toString函数/">关于toString函数。</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">Mr stone</a></p>
         <p><span>发布时间:</span>2016-10-19, 18:50:31</p>
-        <p><span>最后更新:</span>2016-10-19, 19:23:44</p>
+        <p><span>最后更新:</span>2016-10-20, 10:25:57</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2016/10/19/toString函数/" title="关于toString函数。">http://xiaoyi00112.github.io/2016/10/19/toString函数/</a>
             <span class="copy-path" data-clipboard-text="原文: http://xiaoyi00112.github.io/2016/10/19/toString函数/　　作者: Mr stone" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -375,6 +389,12 @@
 
 
     <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/2016/10/19/千变万化的this/">
+                    千变万化的this与构造函数和继承之间关系。
+                </a>
+            </div>
         
         
             <div id="article-nav-older" class="article-nav-title">
@@ -391,7 +411,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#toSting思考的由来"><span class="toc-number">1.</span> <span class="toc-text">toSting思考的由来</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#下面是个函数对toString的复写。"><span class="toc-number">2.</span> <span class="toc-text">下面是个函数对toString的复写。</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#toSting思考的由来"><span class="toc-number">1.</span> <span class="toc-text">toSting思考的由来</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#下面是个函数对toString的复写。"><span class="toc-number">2.</span> <span class="toc-text">下面是个函数对toString的复写。</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#下面是一个关联问题，那就是typeof。"><span class="toc-number">3.</span> <span class="toc-text">下面是一个关联问题，那就是typeof。</span></a></li></ol>
         
     </div>
     <style>
@@ -466,7 +486,9 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+            <a href="/2016/10/19/千变万化的this/" title="上一篇: 千变万化的this与构造函数和继承之间关系。">
+                <i class="fa fa-angle-left"></i>
+            </a>
         
 
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
@@ -478,7 +500,7 @@
         
     </div>
 
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/10/19/toString函数/">关于toString函数。</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/18/图片轮播/">图片轮播</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/13/hexo和git/">hexo建立博客，git上传到远成仓库</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/29/bootstrap学习之插件/">bootstrap学习之插件</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/28/bootstrap学习之组件/">bootstrap学习之组件</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/27/bootstrap学习之起步/">bootstrap学习之起步</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/27/Markdown语法总结1/">Markdown语法总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/26/BUG汇总/">BUG汇总</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/22/思考的重要性/">思考的重要性</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/21/第一篇博客/">第一篇博客</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/21/hello-my-honey-jiaojiao/">hello my honey jiaojiao</a></li></ul>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/10/20/js对象、函数和变量在内存中的实现过程/">js深入分析系列之对象和函数内存加载过程</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/19/千变万化的this/">千变万化的this与构造函数和继承之间关系。</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/19/toString函数/">关于toString函数。</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/18/图片轮播/">图片轮播</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/13/hexo和git/">hexo建立博客，git上传到远成仓库</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/29/bootstrap学习之插件/">bootstrap学习之插件</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/28/bootstrap学习之组件/">bootstrap学习之组件</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/27/bootstrap学习之起步/">bootstrap学习之起步</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/27/Markdown语法总结1/">Markdown语法总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/26/BUG汇总/">BUG汇总</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/22/思考的重要性/">思考的重要性</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/21/第一篇博客/">第一篇博客</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/21/hello-my-honey-jiaojiao/">hello my honey jiaojiao</a></li></ul>
 
 
 

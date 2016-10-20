@@ -15,16 +15,18 @@
 
 
 
-<meta name="description" content="Hello  World">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Nice to meet you">
-<meta property="og:url" content="http://xiaoyi00112.github.io/about/index.html">
+<meta name="description" content="本来想写一篇this完事大捷，可是没想到由this引出了一连串的问题，函数内存加载问题，构造函数实例化对象的过程，call和apply还有bind绑定this问题，还有最为神秘的匿名函数问题，这些问题一个个都是大佬级问题，每一个问题都牛哄哄的站在你的面前，不解决这些问题，this问题难以理解全面，那么接下来就一个个解决吧。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="js深入分析系列之对象和函数内存加载过程">
+<meta property="og:url" content="http://xiaoyi00112.github.io/2016/10/20/js对象、函数和变量在内存中的实现过程/index.html">
 <meta property="og:site_name" content="hexo姣小屋">
-<meta property="og:description" content="Hello  World">
-<meta property="og:updated_time" content="2016-09-27T13:30:22.374Z">
+<meta property="og:description" content="本来想写一篇this完事大捷，可是没想到由this引出了一连串的问题，函数内存加载问题，构造函数实例化对象的过程，call和apply还有bind绑定this问题，还有最为神秘的匿名函数问题，这些问题一个个都是大佬级问题，每一个问题都牛哄哄的站在你的面前，不解决这些问题，this问题难以理解全面，那么接下来就一个个解决吧。">
+<meta property="og:image" content="http://xiaoyi00112.github.io/imgs/new创建过程.png">
+<meta property="og:updated_time" content="2016-10-20T09:07:33.935Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Nice to meet you">
-<meta name="twitter:description" content="Hello  World">
+<meta name="twitter:title" content="js深入分析系列之对象和函数内存加载过程">
+<meta name="twitter:description" content="本来想写一篇this完事大捷，可是没想到由this引出了一连串的问题，函数内存加载问题，构造函数实例化对象的过程，call和apply还有bind绑定this问题，还有最为神秘的匿名函数问题，这些问题一个个都是大佬级问题，每一个问题都牛哄哄的站在你的面前，不解决这些问题，this问题难以理解全面，那么接下来就一个个解决吧。">
+<meta name="twitter:image" content="http://xiaoyi00112.github.io/imgs/new创建过程.png">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -56,7 +58,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>Nice to meet you | hexo姣小屋</title>
+<title>js深入分析系列之对象和函数内存加载过程 | hexo姣小屋</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -66,7 +68,7 @@
         fancybox: true,
         animate: true,
         isHome: false,
-        isPost: false,
+        isPost: true,
         isArchive: false,
         isTag: false,
         isCategory: false,
@@ -266,11 +268,11 @@
     </div>
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
-      <div class="body-wrap"><article id="page-undefined" class="article article-type-page" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-js对象、函数和变量在内存中的实现过程" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/about/index.html" class="article-date">
-      <time datetime="2016-09-23T03:01:59.000Z" itemprop="datePublished">2016-09-23</time>
+      <a href="/2016/10/20/js对象、函数和变量在内存中的实现过程/" class="article-date">
+      <time datetime="2016-10-20T08:50:31.000Z" itemprop="datePublished">2016-10-20</time>
 </a>
 
 
@@ -285,7 +287,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      Nice to meet you
+      js深入分析系列之对象和函数内存加载过程
     </h1>
   
 
@@ -293,8 +295,16 @@
       
       <div class="article-info article-info-post">
         
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/前端/">前端</a>
+    </div>
+
 
         
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/new/">new</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/函数在内存中加载过程/">函数在内存中加载过程</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/前端/">前端</a></li></ul>
+    </div>
+
         <div class="clearfix"></div>
       </div>
       
@@ -302,36 +312,103 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-              <style>
-    .article-meta { display: none; }
-    #container .article .article-title { padding-right: 0; }
-    .article-header {
-        padding: 0;
-        padding-top: 26px;
-        border-left: none;
-        text-align: center;
+        <p>本来想写一篇this完事大捷，可是没想到由this引出了一连串的问题，函数内存加载问题，构造函数实例化对象的过程，call和apply还有bind绑定this问题，还有最为神秘的匿名函数问题，这些问题一个个都是大佬级问题，每一个问题都牛哄哄的站在你的面前，不解决这些问题，this问题难以理解全面，那么接下来就一个个解决吧。<br><a id="more"></a></p>
+<h3 id="首先要说的就是对象和函数在内存中的加载过程"><a href="#首先要说的就是对象和函数在内存中的加载过程" class="headerlink" title="首先要说的就是对象和函数在内存中的加载过程"></a>首先要说的就是对象和函数在内存中的加载过程</h3><p>提到内存就发憷，总感觉是内存是水中望月，想捞却捞不到，其实并不是那样的，想很好的理解一个程序，就要从最基础的开始分析，而最基础的就是从内存入手。</p>
+<p>js中一切皆对象，在浏览器打开的那一刻你就拥有了一个对象window，对象是引用类型被存放在堆中，一般情况下，栈中都存放原始数据类型，堆中都存放引用数据类型，内存中打开一块执行环境栈(ECS),接着执行环境栈中被压入全局执行环境(EC)，EC里其中的两个属性分别是scope和this，scope是作用域链，this不必多说，scope指向window对象的变量空间，window中存放着全局函数和全局变量(VO)。到此为止，初始化完毕。  </p>
+<p>（1）、当执行一个函数时，首先创建函数的执行环境EC(其实也就是一个存放地址的变量,是函数活动对象等属性的引用)，然后在内存中堆区开辟一块变量空间用来存放函数的局部变量(AO)(也就是var出来的变量)，此AO中始终有一个属性指向它上一层的变量空间，最顶层的是window的VO。函数中使用到的变量首先从局部变量找，然后依次网上找，直到VO结束，查找的这个链就是作用域链。如果没找到就报错了。<br>上一段提到的方法是查找作用域链，想要在作用域链中查找是有前提的，那就是你引用的变量必须前面没用this.，如果用了this.了那就不会查找作用域链了，就会在this所指向的对象中查找相关变量。</p>
+<pre><code>var fr=&quot;cat&quot;;
+var person={
+    sname:&quot;tom&quot;,
+    sage:20,
+    sayName:function(){
+        console.log(this.sname);//tom
+        console.log(this.fr);//undefined
+        console.log(fr);//cat
     }
-    .article-header:hover { border-left: none; }
-    .article-title { font-size: 1.6em }
-    .article-entry hr { margin: 0;}
-    .article-meta,
-    #container .article-info-post.article-info { display: none;}
-    #container .article .article-title { padding: 0; }
-</style>
-
-
-          
-        <h2 id="Hello-World"><a href="#Hello-World" class="headerlink" title="Hello  World"></a>Hello  World</h2>
+}
+person.sayName();
+</code></pre><p><strong>从上面的例子中可以看到如果变量前用了this，那么查找变量的作用域就被限定在this所指的对象内</strong></p>
+<p>（2）、当new一个函数时，都发生了什么。<br>当一个构造函数new一个对象的时候一共有四部进行创建。<br>第一步：首先会创建一个空对象，这个对象有一个地址(感觉应该是随机的).相当于一个{}。<br>第二步：用空对象调用构造函数，此时构造函数中的this指向了这个空对象，构造函数会把传进来的值放到自己的变量空间AO中，然后给this.name啦，this.age之类的赋值，空对象中就有了相应的变量了。<br>第三步：把自己的<strong>proto</strong>指向构造函数的原型函数(prototype).<br>第四部，把空对象的地址赋给左边的变量当中。<br>可以参考下面这幅图理解上面的步骤。<br><img src="imgs/new创建过程.png" alt="new创建过程"></p>
+<p><strong>注意:一切函数都有prototype和<strong>proto</strong>属性</strong><br><strong>！important特别注意，每个函数都有成为一个构造函数的可能，这里有一个巨大无比的坑。那就是：<br>上面所谓的第4步其实是一个简化的说法.真正的过程是在第3步之后,如果发现A返回是一个Object类型(非primitive类型,即非string,boolean,number,null,undefined类型就是Object类型),则直接返回A的返回值,否则把第1步new的Object返回出去.(默认情况下,JS中函数默认返回值是undefined)举个例子</strong></p>
+<pre><code>var Person = function(name, age) {
+    this.name = name;
+    this.age = age;
+    this.say = function() {
+        console.log(&quot;name : %s, age : %n&quot;, this.name, this.age);
+    }
+    return [];
+}
+Person.prototype = {
+    constructor:Person,
+    money: 11,
+    showMoney: function() {
+        console.log(this.money);
+        console.log(this.age);
+    }
+}
+var p1 = new Person(&quot;jink&quot;, &quot;24&quot;);
+console.log(p1 );//[]    
+p1.say(); //出错
+</code></pre>
       
     </div>
     
   </div>
   
     
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2016/10/20/js对象、函数和变量在内存中的实现过程/">js深入分析系列之对象和函数内存加载过程</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">Mr stone</a></p>
+        <p><span>发布时间:</span>2016-10-20, 16:50:31</p>
+        <p><span>最后更新:</span>2016-10-20, 17:07:33</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2016/10/20/js对象、函数和变量在内存中的实现过程/" title="js深入分析系列之对象和函数内存加载过程">http://xiaoyi00112.github.io/2016/10/20/js对象、函数和变量在内存中的实现过程/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://xiaoyi00112.github.io/2016/10/20/js对象、函数和变量在内存中的实现过程/　　作者: Mr stone" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
 
+
+
+    <nav id="article-nav">
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2016/10/19/千变万化的this/">
+                    千变万化的this与构造函数和继承之间关系。
+                </a>
+            </div>
+        
+    </nav>
 
   
 </article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#首先要说的就是对象和函数在内存中的加载过程"><span class="toc-number">1.</span> <span class="toc-text">首先要说的就是对象和函数在内存中的加载过程</span></a></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
 
 
 
@@ -349,7 +426,7 @@
         </div>
         <script>
             window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"Nice to meet you　| hexo姣小屋　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+                "common":{"bdSnsKey":{},"bdText":"js深入分析系列之对象和函数内存加载过程　| hexo姣小屋　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
         </script>
     
 
@@ -362,13 +439,50 @@
 
 
 
+    
+      <div class="duoshuo" id="comments">
+    <div id="comment-box" ></div>
+    <div class="ds-thread" id="ds-thread" data-thread-key="2016/10/20/js对象、函数和变量在内存中的实现过程/" data-title="js深入分析系列之对象和函数内存加载过程" data-url="http://xiaoyi00112.github.io/2016/10/20/js对象、函数和变量在内存中的实现过程/"></div>
+    <script>
+        var duoshuoQuery = {short_name:"xiaoyi00112"};
+        var loadComment = function(){
+            var d = document, s = d.createElement('script');
+            s.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+            s.async = true; s.charset = 'UTF-8';
+            (d.head || d.body).appendChild(s);
+        }
+
+        
+    </script>
+    
+    <script> loadComment(); </script>
+
+</div>
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2016/10/19/千变万化的this/" title="下一篇: 千变万化的this与构造函数和继承之间关系。">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/10/20/js对象、函数和变量在内存中的实现过程/">js深入分析系列之对象和函数内存加载过程</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/19/千变万化的this/">千变万化的this与构造函数和继承之间关系。</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/19/toString函数/">关于toString函数。</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/18/图片轮播/">图片轮播</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/13/hexo和git/">hexo建立博客，git上传到远成仓库</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/29/bootstrap学习之插件/">bootstrap学习之插件</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/28/bootstrap学习之组件/">bootstrap学习之组件</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/27/bootstrap学习之起步/">bootstrap学习之起步</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/27/Markdown语法总结1/">Markdown语法总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/26/BUG汇总/">BUG汇总</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/22/思考的重要性/">思考的重要性</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/21/第一篇博客/">第一篇博客</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/21/hello-my-honey-jiaojiao/">hello my honey jiaojiao</a></li></ul>
 
 
 
 
     <script>
-        
-            yiliaConfig.fancybox = false;
         
     </script>
 </div>
