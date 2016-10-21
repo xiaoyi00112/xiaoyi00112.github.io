@@ -15,16 +15,16 @@
 
 
 
-<meta name="description" content="万物皆对象听某位大师说过一句很有哲理的话，万物皆对象，特别是在js中，从页面开始到每一个函数的产生，使用，每一个变量的产生和使用，都依赖于一个对象，其中，对象中最然人琢磨不透的就是它里面的this。下面就来聊聊this。this是js中对象的影子，js中的this就像咱们孙大圣，上天入地，千变万化，总是让人捉摸不定，但又神通广大，下面就来屡屡这神通广大的this到底有什么本领。首先强调一点，万变不">
+<meta name="description" content="不知道为啥，突然想起来科比退役了，感觉还挺悲伤的。。。不扯别的了，来看重点，bind函数如此重要，但是IE8以下都不支持，所以MDN给了一种实现方式，但是如果不仔细分析的话，还真的跟看天书一样。下面就分析一下。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="千变万化的this与构造函数和继承之间关系。">
-<meta property="og:url" content="http://xiaoyi00112.github.io/2016/10/19/千变万化的this/index.html">
+<meta property="og:title" content="JS深入分析系列之MDN的bind函数实现解析">
+<meta property="og:url" content="http://xiaoyi00112.github.io/2016/10/21/JS深入分析系列之MDN的bind函数实现解析/index.html">
 <meta property="og:site_name" content="hexo姣小屋">
-<meta property="og:description" content="万物皆对象听某位大师说过一句很有哲理的话，万物皆对象，特别是在js中，从页面开始到每一个函数的产生，使用，每一个变量的产生和使用，都依赖于一个对象，其中，对象中最然人琢磨不透的就是它里面的this。下面就来聊聊this。this是js中对象的影子，js中的this就像咱们孙大圣，上天入地，千变万化，总是让人捉摸不定，但又神通广大，下面就来屡屡这神通广大的this到底有什么本领。首先强调一点，万变不">
-<meta property="og:updated_time" content="2016-10-21T09:28:25.738Z">
+<meta property="og:description" content="不知道为啥，突然想起来科比退役了，感觉还挺悲伤的。。。不扯别的了，来看重点，bind函数如此重要，但是IE8以下都不支持，所以MDN给了一种实现方式，但是如果不仔细分析的话，还真的跟看天书一样。下面就分析一下。">
+<meta property="og:updated_time" content="2016-10-21T12:03:29.816Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="千变万化的this与构造函数和继承之间关系。">
-<meta name="twitter:description" content="万物皆对象听某位大师说过一句很有哲理的话，万物皆对象，特别是在js中，从页面开始到每一个函数的产生，使用，每一个变量的产生和使用，都依赖于一个对象，其中，对象中最然人琢磨不透的就是它里面的this。下面就来聊聊this。this是js中对象的影子，js中的this就像咱们孙大圣，上天入地，千变万化，总是让人捉摸不定，但又神通广大，下面就来屡屡这神通广大的this到底有什么本领。首先强调一点，万变不">
+<meta name="twitter:title" content="JS深入分析系列之MDN的bind函数实现解析">
+<meta name="twitter:description" content="不知道为啥，突然想起来科比退役了，感觉还挺悲伤的。。。不扯别的了，来看重点，bind函数如此重要，但是IE8以下都不支持，所以MDN给了一种实现方式，但是如果不仔细分析的话，还真的跟看天书一样。下面就分析一下。">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -56,7 +56,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>千变万化的this与构造函数和继承之间关系。 | hexo姣小屋</title>
+<title>JS深入分析系列之MDN的bind函数实现解析 | hexo姣小屋</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -266,11 +266,11 @@
     </div>
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
-      <div class="body-wrap"><article id="post-千变万化的this" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-JS深入分析系列之MDN的bind函数实现解析" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2016/10/19/千变万化的this/" class="article-date">
-      <time datetime="2016-10-19T13:50:31.000Z" itemprop="datePublished">2016-10-19</time>
+      <a href="/2016/10/21/JS深入分析系列之MDN的bind函数实现解析/" class="article-date">
+      <time datetime="2016-10-21T05:50:31.000Z" itemprop="datePublished">2016-10-21</time>
 </a>
 
 
@@ -285,7 +285,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      千变万化的this与构造函数和继承之间关系。
+      JS深入分析系列之MDN的bind函数实现解析
     </h1>
   
 
@@ -300,7 +300,7 @@
 
         
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/this/">this</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/前端/">前端</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/构造函数/">构造函数</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/bind/">bind</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/前端/">前端</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/去柯里化/">去柯里化</a></li></ul>
     </div>
 
         <div class="clearfix"></div>
@@ -310,116 +310,86 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h5 id="万物皆对象"><a href="#万物皆对象" class="headerlink" title="万物皆对象"></a>万物皆对象</h5><p>听某位大师说过一句很有哲理的话，万物皆对象，特别是在js中，从页面开始到每一个函数的产生，使用，每一个变量的产生和使用，都依赖于一个对象，其中，对象中最然人琢磨不透的就是它里面的this。下面就来聊聊this。<br>this是js中对象的影子，js中的this就像咱们孙大圣，上天入地，千变万化，总是让人捉摸不定，但又神通广大，下面就来屡屡这神通广大的this到底有什么本领。<br><strong>首先强调一点，万变不离其宗，this再神通广大，他始终和一个对象绑定在一起，而他最重要的作用就是把作用域限定在一个对象当中！！！！！important</strong>一定要谨记这句话，这是解开this之谜的钥匙。<br>(声明：函数也是一个特殊的对象，如果funa.<strong>proto</strong>，函数<strong>proto</strong>里的this就只想funa，Array等同理，都是特殊对象，this一般指向(.)点前面的对象。)<br><a id="more"></a></p>
-<h4 id="this和对象"><a href="#this和对象" class="headerlink" title="this和对象"></a>this和对象</h4><p>要理清楚this，首先要明确this和对象的关系，this和对象的关系，就是鱼和水，你和你的影子的关系。其实鱼和水的关系最能形容this和对象了，鱼离开了水，它就没发过了，this也一样，this离不开对象，离开对象它也就没意义了。<br>那么问题来了，随着函数的使用场合不同，this的值也会变化，但是总是有一个原则，那就是，this永远指的是调用函数的那个对象，先来看下this的定义！</p>
-<blockquote>
-<p>1、this是函数内部的一个特殊对象（或this引用）–它引用的是函数据以执行的环境对象。</p>
-<p>2、this引用是一种在JavaScript的代码中随时都可以使用的只读变量。 this引用 引用（指向）的是一个对象，它有着会根据代码上下文语境自动改变其引用对象的特性。它的引用规则如下：</p>
-<ul>
-<li><p>在最外层代码中，this引用 引用的是全局对象。</p>
-</li>
-<li><p>在函数内，this引用根据函数调用的方式的不同而有所不同。如下</p>
-</li>
-</ul>
-<blockquote>
-<ol>
-<li><p>构造函数的调用–this引用 引用的是所生成的对象</p>
-</li>
-<li><p>方法调用–this引用 引用的是接收方对象</p>
-</li>
-<li><p>apply或call调用–this引用 引用的是有apply或call的参数指定的对象</p>
-</li>
-<li><p>其他方式的调用–this引用 引用的是全局对象</p>
-</li>
-</ol>
-</blockquote>
-</blockquote>
-<p>是不是看着有点蒙圈，不要着急，下面我们一个一个看this的七十二变。</p>
-<h4 id="1-全局函数中的this"><a href="#1-全局函数中的this" class="headerlink" title="(1)全局函数中的this"></a>(1)全局函数中的this</h4><p>全局的this值得是window对象，全局的变量不用多说，全局的函数，只要没有其他对象引用，函数内部的this都是指window。</p>
-<pre><code>var message = &quot;this in window&quot;;
-
-function func() {
-    if(this == window) {
-        alert(&quot;this == window&quot;);
-        alert(message);
-        this.methodA = function() {
-            alert(&quot;I&apos;m a function&quot;);
+        <p>不知道为啥，突然想起来科比退役了，感觉还挺悲伤的。。。<br>不扯别的了，来看重点，bind函数如此重要，但是IE8以下都不支持，所以MDN给了一种实现方式，但是如果不仔细分析的话，还真的跟看天书一样。下面就分析一下。<br><a id="more"></a></p>
+<h3 id="去柯里化"><a href="#去柯里化" class="headerlink" title="去柯里化"></a>去柯里化</h3><p>是的你没看错，就是去坑里画。。。原谅我有些错了。去柯里化，简单的来说，去柯里化就是使一个函数能这么用：</p>
+<pre><code>function aa={&quot;去柯里化处理&quot;。。。};
+aa(&quot;第一个参数&quot;)(&quot;第二个参数&quot;);
+</code></pre><p>好吧函数调用还可以这么玩，真是见识了，其实这是个老概念，在很多别的编程语言中都有体现。<br>如需详细了解，请转到鑫老大那里去研究一下，鑫老大说得很清楚，下面是文章地址：<a href="http://www.zhangxinxu.com/wordpress/2013/02/js-currying/" target="_blank" rel="external">JS中的柯里化(currying)</a></p>
+<h3 id="bind实现代码解析"><a href="#bind实现代码解析" class="headerlink" title="bind实现代码解析"></a>bind实现代码解析</h3><p>首先献上一位大神的解析代码，这解析代码确实不好找，留着以后复习用：</p>
+<pre><code>if (!Function.prototype.bind) {
+    Function.prototype.bind = function(oThis) {
+        if (typeof this !== &quot;function&quot;) {
+            // closest thing possible to the ECMAScript 5 internal IsCallable function
+            throw new TypeError(&quot;Function.prototype.bind - what is trying to be bound is not callable&quot;);
         }
-    }
-}
-func();
-methodA();
-</code></pre><p>这里有个坑，那就是，在全局函数内部，最好少用this.<em>=</em>;这种形式，在内部，最好使用var出来的变量来接住你的引用或者值，否则不用var，用this.<em>，就等于直接写变量名</em>=<em>*</em>;这种情况你应该知道会把变量声明到全局成为全局变量吧，这样会造成全局污染，尽量少用这种东西，很危险。</p>
-<h4 id="2-构造函数调用"><a href="#2-构造函数调用" class="headerlink" title="(2)构造函数调用"></a>(2)构造函数调用</h4><blockquote>
-<p>new foo()这种形式的调用被称为Constructor Pattern，其关键字new就很能说明问题，非常容易识别。</p>
-</blockquote>
-<p>在这种模式下，foo函数内部的this永远是new foo()返回的对象。<br>构造函数调用，是new实例化出来的一个对象，this就指向了构造函数生成的对象，要想弄清楚this和它之间的关系，就必须弄清楚new的过程中都发生了什么事情，在内存中它们到底是如何运作的。表面上看，是跟所有总结的结果一样都是，this指向了实例化的对象，而实例化的对象名只是存储了一个地址，地址指向了实例化出来的对象而已，这个对象名是一种变量形式存储在全局变量或局部变量中，看你在哪里var的对象了~说了这么多玄乎的，如果有点蒙，就看我下一篇文章（js对象、函数和变量在内存中的实现过程）。<br><strong>注意：</strong>千万别直接执行构造函数，如果你直接执行构造函数，而没有var出对象来接住的话，构造函数内this就指向了window，然后你构造函数内的变量都会声明成全局变量，想想就可怕。ps：构造函数的原型里属性和方法不会被声明到全局，还很安全。</p>
-<pre><code>var Person = function(name, age) {
-    this.name = name;
-    this.age = age;
-    this.say = function() {
-        console.log(&quot;name : %s, age : %n&quot;, this.name, this.age);
-    }
-    console.log(this);
-}
-Person.prototype = {
-    money: 11,
-    showMoney: function() {
-        console.log(this.money);
-    }
 
+        //下面是核心代码
+
+        var aArgs = Array.prototype.slice.call(arguments, 1), //准备要绑定的参数
+
+            //现在是在Function.prototype.bind这个函数里
+            //因此这一句的this指的是OriginalFunction.bind(...)的OriginalFunction，也就是调用bind方法的那个对象
+            fToBind = this,
+
+            //建立一个空函数，指定它的prototype与OriginalFunction相同
+            fNOP = function() {},
+            fNOP.prototype = this.prototype;
+
+        //fBound是bind函数的结果
+        var fBound;
+
+        //注意，这样写是错误的，因为此时fBound还是undefined，但是为了按顺序说明我把对prototype的赋值提前了
+        fBound.prototype = new fNOP();
+        //fBound的原型被指定为new fNOP()，不妨记作fnopObj
+        //这样的话,如果我们把fBound也就是绑定后的函数当作构造函数使用的话：
+        /*
+            var bndObj = new fBound();
+         */
+        //bndObj.__proto__就是fnopObj，而fnopObj.__proto__是OriginalFunction.prototype
+        //再来看直接调用原函数：
+        /*
+            var oriObj = new OriginalFunction();
+         */
+        //oriObj.__proto__是OriginalFunction.prototype
+        //也就是说如果我们绑定了一个构造函数A得到新的构造函数B，则使用B构造的对象仍然会是A的实例，只不过原型链被new fNOP插了一脚
+        //反正new fNOP()本身是{}没有什么属性，插这一脚不影响新对象的使用
+
+        fBound = function() {
+            //注意，现在进入了fBound这个函数内，所以this就是fBound的调用者
+            //当我们直接调用绑定好的函数时：
+            /*
+                var f = function (x, y) { return x + y; }
+                var f7y = f.bind(7); //此时产生的f7y即为bind函数返回的fBound
+                var r = f7y(16); //直接调用f7y，所以this就是window，因此this就不是fNOP的实例，apply传进去的第一个参数就会是oThis || window
+             */
+            //而如果我们使用了new来调用它，例如：
+            /*
+                var f = function (x, y) { this.x = x; this.y = y }
+                var f7y = f.bind(7);
+                var r = new f7y(16);
+                //注意到f7y是使用new来调用的，因此this就是新new出来的对象了
+                //而f7y也就是fBound的prototype属性是new fNOP()，所以this是fNOP的实例
+                //这样就完成了构造函数的功能
+             */
+            //如果调用时指定oThis为null，那么apply的第一个参数就是window
+            return fToBind.apply(this instanceof fNOP &amp;&amp; oThis ? this : oThis || window,
+                aArgs.concat(Array.prototype.slice.call(arguments)));
+        };
+
+        return fBound;
+    };
 }
-[1, 2, 3];
-var p1 = new Person(&quot;jink&quot;, &quot;24&quot;);
-p1.say(); //输出  name : jink, age : 24
-Person(&quot;jink&quot;, &quot;25&quot;);
-console.log(age);//25
-console.log(Person(&quot;jink&quot;, &quot;24&quot;).money);//报错
-</code></pre><h4 id="3-对象方法的调用。"><a href="#3-对象方法的调用。" class="headerlink" title="(3)对象方法的调用。"></a>(3)对象方法的调用。</h4><blockquote>
-<p>诸如foo.bar()的调用形式被称为Method Invocation Pattern，注意其特点是被调用的函数作为一个对象的属性出现，必然会有“.”或者“[]”这样的关键符号。  </p>
-<p>在这种模式下，bar函数体中的this永远为“.”或“[”前的那个对象，如上例中就一定是foo对象。</p>
-</blockquote>
-<h4 id="4-call和apply中的this，当然还要bind-如果"><a href="#4-call和apply中的this，当然还要bind-如果" class="headerlink" title="(4)call和apply中的this，当然还要bind(),如果"></a>(4)call和apply中的this，当然还要bind(),如果</h4><blockquote>
-<p>foo.call(thisObject)和foo.apply(thisObject)的形式被称为Apply Pattern，使用了内置的call和apply函数。</p>
-<p>在这种模式下，call和apply的第一个参数就是foo函数体内的this，如果thisObject是null或undefined，那么会变成Global对象。</p>
-</blockquote>
-<h4 id="5-下面说几种不易识别的this"><a href="#5-下面说几种不易识别的this" class="headerlink" title="(5)下面说几种不易识别的this"></a>(5)下面说几种不易识别的this</h4><p>(1)、构造函数内的this，这个在构造函数中的this中说了，我这里把他归类为第一种难以识别的this<br>(2)、对象中的this：<br>对象中的this主要有两种情况。<br>第一种情况，对象方法中的变量使用this，对象方法中的变量如果使用this，this指向本对象(这个理解起来非常容易，你是我的一个方法，你属于我，你的this当然指向我啦)，如果对象方法中的变量没有this，那么这个变量就会在作用域链中查找，如下面例子；</p>
-<pre><code>var lion={
-    sname:&quot;Lion&quot;,
-    sage:&apos;208&apos;,
-    intrSelf:function(){
-        console.log(&quot;I&apos;m &quot;+this.sname+&quot;,I&apos;m &quot;+this.sage);
-    }
-};
-lion.intrSelf();
-</code></pre><p>如果console.log里面的sname和sage不用this那它就会报错，找不到sname和sage，那它是怎么找的呢，首先在自己的局部变量里找，局部变量找不到就到嵌套intrSelf外面的变量去找(对象有没有function嵌套在intrSelf外面，所以对象内的属性和函数中的作用于根本就是两码事)，这里在他外面就是全局变量了，也就是window里面的变量，这里关系到函数的执行过程，具体情节请阅读（js对象、函数和变量在内存中的实现过程）。<br>第二种情况就是对象方法内的方法，也就是闭包中的this。也就是方法内有嵌套了方法，方法内的方法this会指向window。解决方法呢是在第一层方法内留住this。</p>
-<pre><code>var myObject = {
-    value : 0,
-    increment : function(inc) {
-         this.value += typeof inc === &quot;number&quot; ? inc : 1;
-   }    
-}    
-myObject.increment();
-console.log(myObject.value);  //输出：1
-myObject.increment(3);
-console.log(myObject.value);   //输出：4
-
-myObject.double = function(){
-
-    var that = this;   //解决方法
-        var helper = function(){
-        console.log(that, &quot;: &quot;, that.value); //输出 Object {value: 4,     increment: function, double: function} &quot;: &quot; 4
-           console.log(this, &quot;: &quot;, this.value); //输出  Window {top:     Window, window: Window…} &quot;: &quot; undefined
-}
-
-    helper(); //以函数形式调用
-}
-
-myObject.double();
-</code></pre><p>(3)、对象原型中的this：原型对象及构造函数中的this指向新创建的实例对象。</p>
-<h4 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h4><blockquote>
-<p><a href="http://www.jb51.net/article/89911.htm" target="_blank" rel="external">JavaScript中的this引用(推荐)</a><br><a href="http://www.cnblogs.com/sharpxiajun/p/4148932.html" target="_blank" rel="external">http://www.cnblogs.com/sharpxiajun/p/4148932.html</a><br><a href="http://otakustay.com/object-lookup-in-javascript/" target="_blank" rel="external">JavaScript中的对象查找</a>  </p>
-</blockquote>
+</code></pre><p>看完这段代码我才毛瑟顿开，原来是这么一回事，调用bind之后先返回一个fBound，fBound的原型被初始化为new FNOP(); ，， FNOP的原型等于OriginalFunction的原型，所以fBound.<strong>proto</strong>.<strong>proto</strong>就是OriginalFunction的原型函数。好了，来看看这个fBound是个什么东东，首先他有一个<strong>proto</strong>.<strong>proto</strong>属性指向了OriginalFunction，里面的fToBind和aArgs和fNop，oThis走的作用域链，在函数内部找，分别找到他们对应值。然后会把这个fBound赋给一个值，然后那个值在继续调用。基本上就是这么一个过程。</p>
+<p>主要注意以下几个问题：</p>
+<ol>
+<li>fToBind=this;这个this到底是指向什么。</li>
+<li>先return fBound，这是个函数。</li>
+<li>this instanceof FNOP？这里面的this和FNOP到底指的什么，</li>
+<li>this:oThis||this,aArgs…，z这连个this的作用，第二个this为了oThis传null和undefined准备的，aArgs存了第一次传入的参数，然后后面的是再加上后来传进来的参数；</li>
+<li>一定要弄清楚所谓的柯里化是怎么实现的。</li>
+</ol>
+<p>好了能弄清楚上面的问题，基本上解决问题了。下面附上引用代码的地址，真是个高手。<br><a href="https://segmentfault.com/q/1010000002874323" target="_blank" rel="external">javascript关于bind方法的实现</a>。</p>
+<p>OK,打完收工~~</p>
 
       
     </div>
@@ -428,13 +398,13 @@ myObject.double();
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2016/10/19/千变万化的this/">千变万化的this与构造函数和继承之间关系。</a></p>
+        <p><span>本文标题:</span><a href="/2016/10/21/JS深入分析系列之MDN的bind函数实现解析/">JS深入分析系列之MDN的bind函数实现解析</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">Mr stone</a></p>
-        <p><span>发布时间:</span>2016-10-19, 21:50:31</p>
-        <p><span>最后更新:</span>2016-10-21, 17:28:25</p>
+        <p><span>发布时间:</span>2016-10-21, 13:50:31</p>
+        <p><span>最后更新:</span>2016-10-21, 20:03:29</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2016/10/19/千变万化的this/" title="千变万化的this与构造函数和继承之间关系。">http://xiaoyi00112.github.io/2016/10/19/千变万化的this/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://xiaoyi00112.github.io/2016/10/19/千变万化的this/　　作者: Mr stone" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2016/10/21/JS深入分析系列之MDN的bind函数实现解析/" title="JS深入分析系列之MDN的bind函数实现解析">http://xiaoyi00112.github.io/2016/10/21/JS深入分析系列之MDN的bind函数实现解析/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://xiaoyi00112.github.io/2016/10/21/JS深入分析系列之MDN的bind函数实现解析/　　作者: Mr stone" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
         <p>
@@ -446,16 +416,10 @@ myObject.double();
 
     <nav id="article-nav">
         
-            <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2016/10/20/js对象、函数和变量在内存中的实现过程/">
-                    js深入分析系列之对象和函数内存加载过程
-                </a>
-            </div>
-        
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/2016/10/19/toString函数/">
-                    关于toString函数。
+                <a href="/2016/10/20/js深入分析系列之call、apply和bind/">
+                    JS深入分析系列之call、apply和bind
                 </a>
             </div>
         
@@ -467,7 +431,7 @@ myObject.double();
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-5"><a class="toc-link" href="#万物皆对象"><span class="toc-number">1.</span> <span class="toc-text">万物皆对象</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#this和对象"><span class="toc-number"></span> <span class="toc-text">this和对象</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-全局函数中的this"><span class="toc-number"></span> <span class="toc-text">(1)全局函数中的this</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-构造函数调用"><span class="toc-number"></span> <span class="toc-text">(2)构造函数调用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-对象方法的调用。"><span class="toc-number"></span> <span class="toc-text">(3)对象方法的调用。</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-call和apply中的this，当然还要bind-如果"><span class="toc-number"></span> <span class="toc-text">(4)call和apply中的this，当然还要bind(),如果</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-下面说几种不易识别的this"><span class="toc-number"></span> <span class="toc-text">(5)下面说几种不易识别的this</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#参考文章"><span class="toc-number"></span> <span class="toc-text">参考文章</span></a>
+            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#去柯里化"><span class="toc-number">1.</span> <span class="toc-text">去柯里化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#bind实现代码解析"><span class="toc-number">2.</span> <span class="toc-text">bind实现代码解析</span></a></li></ol>
         
     </div>
     <style>
@@ -503,7 +467,7 @@ myObject.double();
         </div>
         <script>
             window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"千变万化的this与构造函数和继承之间关系。　| hexo姣小屋　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+                "common":{"bdSnsKey":{},"bdText":"JS深入分析系列之MDN的bind函数实现解析　| hexo姣小屋　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
         </script>
     
 
@@ -519,7 +483,7 @@ myObject.double();
     
       <div class="duoshuo" id="comments">
     <div id="comment-box" ></div>
-    <div class="ds-thread" id="ds-thread" data-thread-key="2016/10/19/千变万化的this/" data-title="千变万化的this与构造函数和继承之间关系。" data-url="http://xiaoyi00112.github.io/2016/10/19/千变万化的this/"></div>
+    <div class="ds-thread" id="ds-thread" data-thread-key="2016/10/21/JS深入分析系列之MDN的bind函数实现解析/" data-title="JS深入分析系列之MDN的bind函数实现解析" data-url="http://xiaoyi00112.github.io/2016/10/21/JS深入分析系列之MDN的bind函数实现解析/"></div>
     <script>
         var duoshuoQuery = {short_name:"xiaoyi00112"};
         var loadComment = function(){
@@ -542,15 +506,13 @@ myObject.double();
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2016/10/20/js对象、函数和变量在内存中的实现过程/" title="上一篇: js深入分析系列之对象和函数内存加载过程">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
 
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2016/10/19/toString函数/" title="下一篇: 关于toString函数。">
+            <a href="/2016/10/20/js深入分析系列之call、apply和bind/" title="下一篇: JS深入分析系列之call、apply和bind">
                 <i class="fa fa-angle-right"></i>
             </a>
         
