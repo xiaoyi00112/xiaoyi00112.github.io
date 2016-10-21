@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+
+    <!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no" />
+<meta name="author" content="Mr stone" />
+
+
+
+<meta name="description" content="call,apply和bind实现了很多奇银翼巧，他们之所以神通广大，还是离不开他们改变this这个本领，下面就来探索一下它的强大之处吧。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JS深入分析系列之call、apply和bind">
+<meta property="og:url" content="http://xiaoyi00112.github.io/2016/10/20/js深入分析系列之call、apply和bind/index.html">
+<meta property="og:site_name" content="hexo姣小屋">
+<meta property="og:description" content="call,apply和bind实现了很多奇银翼巧，他们之所以神通广大，还是离不开他们改变this这个本领，下面就来探索一下它的强大之处吧。">
+<meta property="og:image" content="http://xiaoyi00112.github.io/imgs/bind的绑定逐步简化.png">
+<meta property="og:updated_time" content="2016-10-21T05:42:41.413Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JS深入分析系列之call、apply和bind">
+<meta name="twitter:description" content="call,apply和bind实现了很多奇银翼巧，他们之所以神通广大，还是离不开他们改变this这个本领，下面就来探索一下它的强大之处吧。">
+<meta name="twitter:image" content="http://xiaoyi00112.github.io/imgs/bind的绑定逐步简化.png">
+
+<link rel="apple-touch-icon" href= "/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="hexo姣小屋" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="/favicon.png">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>JS深入分析系列之call、apply和bind | hexo姣小屋</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: undefined
+    }
+</script>
+
+
+    <script> yiliaConfig.jquery_ui = [false]; </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/head.jpg" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">Mr stone</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">HEXO心灵小屋</p>
+        
+
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" href="mailto:499686855@qq.com" title="Email"></a>
+                            
+                                <a class="fa 新浪微博" href="http://weibo.com/3219827273" title="新浪微博"></a>
+                            
+                                <a class="fa GitHub" href="https://github.com/xiaoyi00112" title="GitHub"></a>
+                            
+                                <a class="fa 知乎" href="https://www.zhihu.com/people/wang-yan-43-63" title="知乎"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/BUG/">BUG</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Markdown语法/">Markdown语法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bind/">bind</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bootstrap/">bootstrap</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/call/">call</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/new/">new</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/this/">this</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/函数在内存中加载过程/">函数在内存中加载过程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前端/">前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/图片轮播/">图片轮播</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/构造函数/">构造函数</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/随笔/">随笔</a></li></ul>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://pages.github.com/">GitHub</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://moxfive.xyz/">MOxFIVE</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://www.365mini.com/">CodePlayer中文文档</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">专注于前端</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">Mr stone</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/head.jpg" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">Mr stone</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">HEXO心灵小屋</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="mailto:499686855@qq.com" title="Email"></a>
+                            
+                                <a class="fa 新浪微博" target="_blank" href="http://weibo.com/3219827273" title="新浪微博"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="https://github.com/xiaoyi00112" title="GitHub"></a>
+                            
+                                <a class="fa 知乎" target="_blank" href="https://www.zhihu.com/people/wang-yan-43-63" title="知乎"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
+</nav>
+      <div class="body-wrap"><article id="post-js深入分析系列之call、apply和bind" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/10/20/js深入分析系列之call、apply和bind/" class="article-date">
+      <time datetime="2016-10-20T09:50:31.000Z" itemprop="datePublished">2016-10-20</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      JS深入分析系列之call、apply和bind
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/前端/">前端</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/bind/">bind</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/call/">call</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/前端/">前端</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>call,apply和bind实现了很多奇银翼巧，他们之所以神通广大，还是离不开他们改变this这个本领，下面就来探索一下它的强大之处吧。</p>
+<a id="more"></a>
+<p><a href="#ganhuo1">干货顺风车</a></p>
+<h4 id="他们的相同点和区别"><a href="#他们的相同点和区别" class="headerlink" title="他们的相同点和区别"></a>他们的相同点和区别</h4><p>无论是call，apply或者bind最主要的作用就是改变this的值，也就是改变作用域，那么在JS中他们又有什么区别呢。<br>首先说下他们的相似之处：1.都会改变this的指向；2.第一个参数都是this要指向的对象；3.都可以利用后续参数传参。下面是一个经典的例子。</p>
+<pre><code>var xw = {
+   name : &quot;小王&quot;,
+   gender : &quot;男&quot;,
+   age : 24,
+   say : function() {
+          alert(this.name + &quot; , &quot; + this.gender + &quot; ,今年&quot; + this.age);       
+         }
+ }
+ var xh = {
+    name : &quot;小红&quot;,
+    gender : &quot;女&quot;,
+    age : 18
+  }
+  xw.say();
+</code></pre><p>对于call可以这样：</p>
+<pre><code>xw.say.call(xh);
+</code></pre><p>对于apply可以这样：</p>
+<pre><code>xw.say.apply(xh);
+</code></pre><p>而对于bind来说需要这样：</p>
+<pre><code>xw.say.bind(xh)();
+</code></pre><p>如果直接写xw.say.bind(xh)是不会有任何结果的，看到区别了吗？call和apply都是对函数的直接调用，而bind方法返回的仍然是一个函数，因此后面还需要()来进行调用才可以。</p>
+<p>对于call来说是这样的</p>
+<pre><code>xw.say.call(xh,&quot;实验小学&quot;,&quot;六年级&quot;);       
+</code></pre><p>而对于apply来说是这样的</p>
+<pre><code>xw.say.apply(xh,[&quot;实验小学&quot;,&quot;六年级&quot;]);
+</code></pre><p>对于bind来说是</p>
+<pre><code>xw.say.bind(xh,&quot;实验小学&quot;,&quot;六年级&quot;)();
+</code></pre><p>或者</p>
+<pre><code>xw.say.bind(xh)(&quot;实验小学&quot;,&quot;六年级&quot;);
+</code></pre><p>通过上面的例子可以很清晰的看出他们的相同点和区别。</p>
+<h4 id="再来点高级用法"><a href="#再来点高级用法" class="headerlink" title="再来点高级用法"></a>再来点高级用法</h4><p>1.bind绑定事件处理函数</p>
+<blockquote>
+<p>bind方法会创建一个新函数,称为绑定函数.当调用这个绑定函数时,绑定函数会以创建它时传入bind方法的第一个参数作为this,传入bind方法的第二个以及以后的参数加上绑定函数运行时本身的参数按照顺序作为原函数的参数来调用原函数.</p>
+</blockquote>
+<p>那么可以利用bind的返回一个函数体的特性来为事件绑定callback函数。</p>
+<pre><code>var logger = {
+   x: 0,       
+   updateCount: function(){
+       this.x++;
+       console.log(this.x);
+   }
+}
+</code></pre><p>事件处理函数是个函数体，如果直接使用callback则会造成里面的this指向window，一般解决方案是给外层包裹一个匿名函数。</p>
+<pre><code>document.querySelector(&apos;button&apos;).addEventListener(&apos;click&apos;, function(){
+   logger.updateCount();
+});
+
+document.querySelector(&apos;button&apos;).addEventListener(&apos;click&apos;, logger.updateCount.bind(logger));
+</code></pre><p>上面两种实现形式是一样的。</p>
+<p>2.同样可以用用到setTimeout或者setInterval里面。</p>
+<pre><code> function LateBloomer() {
+  this.petalCount = Math.ceil( Math.random() * 12 ) + 1;
+ }
+ // declare bloom after a delay of 1 second
+ LateBloomer.prototype.bloom = function() {
+  window.setTimeout( this.declare.bind( this ), 1000 );
+};
+ LateBloomer.prototype.declare = function() {
+  console.log(&apos;I am a beautiful flower with &apos; + this.petalCount + &apos; petals!&apos;);
+ };
+</code></pre><p>看一下这里this.dclare.bind(this)，相当于将LateBloomer的实例对象传递到declare中，是不是setTimeout简洁了很多，同时不会破坏其他执行函数的结构。</p>
+<p>3.如果你能看懂上面的例子说明你的this基础不错了，下面让我么再来检验下吧。<br>这里请允许我转载一篇博友的东西，实在是太棒了，看的我都如痴如醉，爽歪歪。</p>
+<p>//设立一个简单地对象作为“上下文”</p>
+<pre><code>var context = { foo: &quot;bar&quot; };
+</code></pre><p> //一个在this上下文中指向foo变量的函数</p>
+<pre><code>function returnFoo () {
+      return this.foo;
+}
+</code></pre><p> // 变量在作用域中不存在，因此显示undefined</p>
+<pre><code>returnFoo(); // =&gt; undefined
+</code></pre><p> // 如果我们把它绑定在context上下文中</p>
+<pre><code>var bound = returnFoo.bind(context);
+</code></pre><p> // 现在的作用域中有这个变量了</p>
+<pre><code>bound(); // =&gt; &quot;bar&quot;
+</code></pre><p> // 这就是Function.prototype.bind的作用.<br> //由于returnFoo也是函数，因此它继承了function的原型<br> //<br> // 如果你觉得享受，接着往下读，下面更精彩<br> //<br> // 有许多方法将函数绑定在一个上下文中<br> // Call和Apply让你能在上下文中调用函数</p>
+<pre><code>returnFoo.call(context); // =&gt; bar
+ returnFoo.apply(context); // =&gt; bar
+</code></pre><p> // 将函数添加到对象中</p>
+<pre><code>context.returnFoo = returnFoo;
+ context.returnFoo(); // =&gt; bar
+</code></pre><p> //<br> // 现在我们来玩一点诡异的东西<br> //<br> // Array.prototype 中有一个叫做slice的方法<br> // 对一个数组调用slice，可以返回一个从start index到end index的数组<br> [1,2,3].slice(0,1); // =&gt; [1]<br> // 因此我们把Array.slice赋值给一个本地变量slice</p>
+<pre><code>var slice = Array.prototype.slice;
+</code></pre><p> //现在的slice是”自由的”，由于Array.prototype中的slice一般指定了上下文<br> //或者默认为this,此时slice将不起作用  </p>
+<blockquote>
+<p>上面的问题就出现在，内置的slice，内部使用了this，当我们简单引用时，this在运行时成为了全局环境window，当然会造成错误。我们只需要简单的使用bind，就能创建一个函数副本。</p>
+</blockquote>
+<pre><code>slice(0, 1); // =&gt; TypeError: can&apos;t convert undefined to object
+slice([1,2,3], 0, 1); // =&gt; TypeError: ...
+</code></pre><p> // 但是如果我们使用call或者apply，slice又将在一个上下文中执行</p>
+<pre><code>slice.call([1,2,3], 0, 1); // =&gt; [1]
+</code></pre><p> // Apply和Call差不多，知识参数要放在一个数组中</p>
+<pre><code>slice.apply([1,2,3], [0,1]); // =&gt; [1]
+</code></pre><p> // 使用call没错了，那么能不呢使用bind呢？<br> // 没错，我们来把”call”绑定在slice上</p>
+<pre><code>slice = Function.prototype.call.bind(Array.prototype.slice);
+</code></pre><p> // 现在slice可以把第一个参数作为上下文了</p>
+<pre><code>slice([1,2,3], 0, 1); // =&gt; [1]
+</code></pre><p> //<br> // 很酷，对吧。现在再来完成一件事<br> //<br> // 现在我们对bind本身做一件刚才对silce做的事</p>
+<pre><code>var bind = Function.prototype.call.bind(Function.prototype.bind);
+</code></pre><p> // 在这里总结一下，好好想想<br> // 发生了什么事? 我们改变了call，<br> // 返回一个接收一个函数和一个上下文作为ic桉树的函数<br> //并且返回了一个完全绑定的函数<br> // 回到最初的例子</p>
+<pre><code>var context = { foo: &quot;bar&quot; };
+function returnFoo () {
+ return this.foo;
+}
+</code></pre><p> // 现在来使用神奇的”bind”函数</p>
+<pre><code>var amazing = bind(returnFoo, context);
+amazing(); // =&gt; bar
+</code></pre><p>看完上面的代码第一个感觉实在是太cool了，一些常见的绑定我这里就不说了，我主要想说一下，最后面的两个超级爽快的技巧。</p>
+<pre><code>slice = Function.prototype.call.bind(Array.prototype.slice);
+</code></pre><p>这代码简直是艺术，艺术的都有点反人类了，不过还是要分析一下滴，它到底做了什么事呢。<br>首先要说明下bind的参数问题。一段代码搞定</p>
+<pre><code>function list() {
+      return Array.prototype.slice.call(arguments);
+}
+
+var list1 = list(1, 2, 3); // [1, 2, 3]
+
+// Create a function with a preset leading argument
+var leadingThirtysevenList = list.bind(undefined, 37);
+
+var list2 = leadingThirtysevenList(); // [37]
+var list3 = leadingThirtysevenList(1, 2, 3); // [37, 1, 2, 3]
+</code></pre><p><span id="ganhuo1"></span><br><strong>经过大概快一天的想法和推断，终于找到了解决方案，感谢啊！！！我的神！！！</strong></p>
+<p>是不是看着slice = Function.prototype.call.bind(Array.prototype.slice);这种反人类的写法很反人类,是不是看着这种Array.prototype.slice.call();这种写法有点蒙圈，不要怕不要怕，经过我一段时间的考虑，这个问题有一个很清楚简单的方法解决看不懂的问题。<br>源码没得看，度娘不好使，英文看不惯，不要怕，只要你坚持去想，并不断试问自己的初衷，不断从自己的出发点考虑这个问题，你一定会得到你的答案的！！！<br>好了废话不多说，现在就来干货！！<br>首先要从这个问题入手，我们为什么要用  </p>
+<pre><code>var slice = Array.prototype.slice;
+</code></pre><p>为什么下面这样写就出错了呢。</p>
+<pre><code>slice([1,2,3],0,1);//出错
+</code></pre><p>为什么加上call就不出错了呢，像这样~</p>
+<pre><code>slice.call([1,2,3],0,2);//[1,2]
+</code></pre><p>又为什么</p>
+<blockquote>
+<p>var slice=Function.prototype.call.bind(Array.prototype.slice);</p>
+</blockquote>
+<p>这种反人类的写法这么大获全胜，一点错误没有呢,而且完美实现上面两句话的结果。这个故事首先要从bind的语法形式说起(这里就光说bind了)；</p>
+<blockquote>
+<p>fun.bind(thisArg[, arg1[, arg2[, …]]])</p>
+</blockquote>
+<p>上面是MDN上关于Function.prototype.bind()的语法解释。<br>现在来分析一下语法形式。<br>1、bind前面是个function，是个方法，哈哈方法好，可以为我们做很多事。一定要记住，是个方法，不是对象;<br>2、bind括号里的第一个参数是一个对象，啊~对象，你比大象多一环。。。是的，对象，对象是一个具体的东西，他有很多属性和方法，但是不一定有bind前面的方法。从MDN上可以看到解释  </p>
+<blockquote>
+<p>当目标函数被调用时 this 值绑定到 bind() 的第一个参数，该参数不能被重写。</p>
+</blockquote>
+<p>这句话用中文看起来真是别扭，其实意思就是，bind()执行之后，bind会把bind前面的那个方法的this值指向bind传入的第一个参数，也就是那个对象~~这下够清楚了，我滴个神，还不清楚，就是你执行了bind之后，function里的(this.某某某)就被限制到了后面那个对象thisArg里了，你function里想用this.某某某都得去function里面找，找不到就undefied，当然如果你function里使用变量不加this，你这个变量就是走的作用域链。<br>这里要科普一下：(1)对于(this.某某某)一般调用的是一个对象中的属性，对象中有就用，对象中没有就undefined。so easy。(2)而对于变量前不用this的，你就跟我对象没有半毛钱关系了(除非你自己把他们关联起来)，走你的作用域链去，自己函数内找不到，你就照着你的作用域链慢慢找。。。(这点和很多别的语言的变量使用方法不一样，就因为js先天跟块级作用域有过节的原因。。)。光说不练不是好汉，来一个例子看个清楚：</p>
+<pre><code>function Product(name, price) {
+      this.name = name;
+      var price=1000000000;
+      if (price &lt; 0) {
+    throw RangeError(&apos;Cannot create product &apos; +
+      this.name + &apos; with a negative price&apos;);
+  }else{
+        console.log(this);
+    console.log(this.name+&quot;   &quot;+this.price+&quot;  &quot;+&quot;    &quot;+this.category);
+    console.log(&quot;你的创始人有&quot;+price+&quot;这么多钱不止&quot;)
+    this.sayHi();
+  }
+}
+
+var tom={};
+tom.category=&quot;cacbbage&quot;
+tom.sayHi=function(){
+  console.log(&quot;hi&quot;);
+}
+tom.price=9999999;
+console.log(tom);
+var tomAddAttr=Product.bind(tom);
+console.log(tom);
+tomAddAttr(&quot;TTom&quot;);
+console.log(tom);
+</code></pre><p>看到了吗，Product通过bind把他里面的this指向了tom之后，如果用this.price调用，那么就是tom对象里自己的钱，如果不用this调用price，那么这个price就是Product创始人的钱。。。你们分的好清啊！！！</p>
+<p>好了所里啰嗦了半天该回到正题了，上面主要是想说明绑定this之后的作用。下面重点来了：我们先回到逆天的写法  </p>
+<blockquote>
+<p>var slice=Function.prototype.call.bind(Array.prototype.slice);</p>
+</blockquote>
+<p>看到这样的写法第一个想法是，我也想写一个这么优雅东东出来，逼格好高啊，但是高逼格往往的通过努力达到，好了又啰嗦了，来吧分析一下我们写这句话的目的到底是什么。<br>写这句话我们的终极想法是这样的  </p>
+<pre><code>slice([1,2,3],0,2);//[1,2]
+slice(arguments,1);
+</code></pre><p>下面那个实现姑且放下，来看看上面那种做法，什么呀，切割数组搞这么复杂，玩我呢，我这样不也可以：</p>
+<pre><code>[1,2,3].slice(0,2);
+</code></pre><p>OK你赢了兄弟，你说出了事物的本质，别一脸懵O的样子，切听我细细道来；<br>如果我们定义一个slice是这样的：</p>
+<pre><code>var slice=Array.prototype.slice;
+</code></pre><p>路人甲：定你定去呗，这样我也能用，看我的：</p>
+<pre><code>[1,2,3].slice(0,2);//[1,2]
+</code></pre><p>路人甲：额。。咋看着那么眼熟啊，跟上面咋一样捏。我这样玩</p>
+<pre><code>slice([1,2,3],0,2);//报错
+</code></pre><p>路人甲：我的天呀，丫的怎么报错了，信不信我打你。。。</p>
+<p>我：额，兄弟，冷静一下，让我说两句。人家slice()这个函数就允许你传两个值进去，一个是初始切的位置，第二个是结束的位置，你给人家一个[1,2,3]这样的数组，人家能认识才怪呢！！你把身份证当银行卡刷着玩，能刷出来才怪呢。。。不过不要着急，我有个方法能让你这么玩，来看：</p>
+<pre><code>slice.call([1,2,3],0,2);//[1,2]
+</code></pre><p>路人甲：诶，还真能当银行卡刷着玩啊，这好玩，这咋办到的呢？<br>我：不瞒你，兄弟，我也是个菜鸟，对于内部机制还真是不知道，不过请允许我大胆的猜测一下这个实现的方式，你看，通过本来的样子（[1,2,3].slice(0,2);）和现在的样子（slice.call([1,2,3],0,2);）的对比，我们可以看到好像call偷偷干了件事情，那就是给[1,2,3]东东添加了一个方法并且立即执行了这个方法，然后[1,2,3]这个东东就有了slice方法，然后他就可以尽情的这么玩了。</p>
+<pre><code>[1,2,3].slice(0,2)
+</code></pre><p>我：再说详细点就是call一来，第一步把call前面的方法添加到传入call的第一个元素的对象上，第二步就是用这个对象立即调用这个函数。这看起来就像 <strong>把括号里的对象加个点放到前面的方法哪里，后面参数不动并且立即调用，对我觉得就是这么干的</strong>结合下面这张图能更好的理解，来看图：  </p>
+<p><img src="/imgs/bind的绑定逐步简化.png" alt="bind的绑定逐步简化"></p>
+<p>有了主机简化的神功我想这个东西好理解了吧来看：</p>
+<blockquote>
+<p>var slice=Function.prototype.call.bind(Array.prototype.slice);<br>slice([1,2,3],0,2);</p>
+</blockquote>
+<p>先把Array.prototype.slice提出来成这个样子：</p>
+<blockquote>
+<p>Array.prototype.slice.call([1,2,3],0,2);</p>
+</blockquote>
+<p>然后再把[1,2,3]提出来成了这个样子：</p>
+<blockquote>
+<p>[1,2,3].slice(0,2);</p>
+</blockquote>
+<p>大功告成，现在有点明白了吧。<br>接下来总结一下，其实apply和call我就不多说了，来总结bind，因为bind可以返回函数，所以有很多强大的用法，来拿标准说事，通过标准定义，来分析一下；</p>
+<blockquote>
+<p>fun.bind(thisArg[, arg1[, arg2[, …]]])</p>
+</blockquote>
+<p>看上面的bind的几个定义，通过我的总结，bind主要是做了一件这样的事，第一步，把fun方法添加到thisArg里面，第二步返回一个thisArg.fun的函数。apply和call只不过誓不反悔直接执行了，但是大体过程一样。最后来验证一下：</p>
+<pre><code>var slice=Array.prototype.slice;
+var a={
+      length:2,
+      0:&quot;Tom&quot;,
+      1:&quot;lili&quot;,
+      2:&quot;Deivd&quot;,
+      3:&quot;Mary&quot;,
+    4:&quot;Ladygaga&quot;
+}
+console.log(a);
+console.log(slice.call(a));//[&quot;Tom&quot;,&quot;lili&quot;];
+</code></pre><p>看样子类数组对象中的length对于slice的切割很重要呢，内部实现不管了，就先说到这里吧。<br><strong>以上仅为个人观点，如有错误，欢迎指正，谢谢~</strong></p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2016/10/20/js深入分析系列之call、apply和bind/">JS深入分析系列之call、apply和bind</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">Mr stone</a></p>
+        <p><span>发布时间:</span>2016-10-20, 17:50:31</p>
+        <p><span>最后更新:</span>2016-10-21, 13:42:41</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2016/10/20/js深入分析系列之call、apply和bind/" title="JS深入分析系列之call、apply和bind">http://xiaoyi00112.github.io/2016/10/20/js深入分析系列之call、apply和bind/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://xiaoyi00112.github.io/2016/10/20/js深入分析系列之call、apply和bind/　　作者: Mr stone" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2016/10/20/js对象、函数和变量在内存中的实现过程/">
+                    js深入分析系列之对象和函数内存加载过程
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#他们的相同点和区别"><span class="toc-number">1.</span> <span class="toc-text">他们的相同点和区别</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#再来点高级用法"><span class="toc-number">2.</span> <span class="toc-text">再来点高级用法</span></a></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"JS深入分析系列之call、apply和bind　| hexo姣小屋　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+      <div class="duoshuo" id="comments">
+    <div id="comment-box" ></div>
+    <div class="ds-thread" id="ds-thread" data-thread-key="2016/10/20/js深入分析系列之call、apply和bind/" data-title="JS深入分析系列之call、apply和bind" data-url="http://xiaoyi00112.github.io/2016/10/20/js深入分析系列之call、apply和bind/"></div>
+    <script>
+        var duoshuoQuery = {short_name:"xiaoyi00112"};
+        var loadComment = function(){
+            var d = document, s = d.createElement('script');
+            s.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+            s.async = true; s.charset = 'UTF-8';
+            (d.head || d.body).appendChild(s);
+        }
+
+        
+    </script>
+    
+    <script> loadComment(); </script>
+
+</div>
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2016/10/20/js对象、函数和变量在内存中的实现过程/" title="下一篇: js深入分析系列之对象和函数内存加载过程">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/10/20/js深入分析系列之call、apply和bind/">JS深入分析系列之call、apply和bind</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/20/js对象、函数和变量在内存中的实现过程/">js深入分析系列之对象和函数内存加载过程</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/19/千变万化的this/">千变万化的this与构造函数和继承之间关系。</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/19/toString函数/">关于toString函数。</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/18/图片轮播/">图片轮播</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/13/hexo和git/">hexo建立博客，git上传到远成仓库</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/29/bootstrap学习之插件/">bootstrap学习之插件</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/28/bootstrap学习之组件/">bootstrap学习之组件</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/27/bootstrap学习之起步/">bootstrap学习之起步</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/27/Markdown语法总结1/">Markdown语法总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/26/BUG汇总/">BUG汇总</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/22/思考的重要性/">思考的重要性</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/21/第一篇博客/">第一篇博客</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/21/hello-my-honey-jiaojiao/">hello my honey jiaojiao</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2016 Mr stone
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>| </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit"  title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 5;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+            
+            
+            
+            
+            
+            
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
+</html>
