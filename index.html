@@ -189,7 +189,7 @@
                 
                 <section class="switch-part switch-part2">
                     <div class="widget tagcloud" id="js-tagcloud">
-                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/BUG/">BUG</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Markdown语法/">Markdown语法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bind/">bind</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bootstrap/">bootstrap</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/call/">call</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/new/">new</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/this/">this</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/函数在内存中加载过程/">函数在内存中加载过程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前端/">前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/图片轮播/">图片轮播</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/构造函数/">构造函数</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/随笔/">随笔</a></li></ul>
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/BUG/">BUG</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Markdown语法/">Markdown语法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bind/">bind</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bootstrap/">bootstrap</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/call/">call</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/new/">new</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/this/">this</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/函数在内存中加载过程/">函数在内存中加载过程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前端/">前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/图片轮播/">图片轮播</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/构造函数/">构造函数</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/随笔/">随笔</a></li></ul>
                     </div>
                 </section>
                 
@@ -437,7 +437,7 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-              <h5 id="万物皆对象"><a href="#万物皆对象" class="headerlink" title="万物皆对象"></a>万物皆对象</h5><p>听某位大师说过一句很有哲理的话，万物皆对象，特别是在js中，从页面开始到每一个函数的产生，使用，每一个变量的产生和使用，都依赖于一个对象，其中，对象中最然人琢磨不透的就是它里面的this。下面就来聊聊this。<br>this是js中对象的影子，js中的this就像咱们孙大圣，上天入地，千变万化，总是让人捉摸不定，但又神通广大，下面就来屡屡这神通广大的this到底有什么本领。<br><strong>首先强调一点，万变不离其宗，this再神通广大，他始终和一个对象绑定在一起，而他最重要的作用就是把作用域限定在一个对象当中！！！！！important</strong>一定要谨记这句话，这是解开this之谜的钥匙。<br>
+              <h5 id="万物皆对象"><a href="#万物皆对象" class="headerlink" title="万物皆对象"></a>万物皆对象</h5><p>听某位大师说过一句很有哲理的话，万物皆对象，特别是在js中，从页面开始到每一个函数的产生，使用，每一个变量的产生和使用，都依赖于一个对象，其中，对象中最然人琢磨不透的就是它里面的this。下面就来聊聊this。<br>this是js中对象的影子，js中的this就像咱们孙大圣，上天入地，千变万化，总是让人捉摸不定，但又神通广大，下面就来屡屡这神通广大的this到底有什么本领。<br><strong>首先强调一点，万变不离其宗，this再神通广大，他始终和一个对象绑定在一起，而他最重要的作用就是把作用域限定在一个对象当中！！！！！important</strong>一定要谨记这句话，这是解开this之谜的钥匙。<br>(声明：函数也是一个特殊的对象，如果funa.<strong>proto</strong>，函数<strong>proto</strong>里的this就只想funa，Array等同理，都是特殊对象，this一般指向(.)点前面的对象。)<br>
           
       
     </div>
@@ -612,9 +612,213 @@
 
 
   
+    <article id="post-BUG汇总" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/10/15/BUG汇总/" class="article-date">
+      <time datetime="2016-10-15T01:50:31.000Z" itemprop="datePublished">2016-10-15</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/10/15/BUG汇总/">BUG汇总</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+              <h3 id="下面总结一下平时遇到的一些常见BUG，遇到什么添加什么，持久更新！！"><a href="#下面总结一下平时遇到的一些常见BUG，遇到什么添加什么，持久更新！！" class="headerlink" title="下面总结一下平时遇到的一些常见BUG，遇到什么添加什么，持久更新！！"></a>下面总结一下平时遇到的一些常见BUG，遇到什么添加什么，持久更新！！</h3>
+          
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/前端/">前端</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/BUG/">BUG</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/前端/">前端</a></li></ul>
+    </div>
+
+      
+        <p class="article-more-link">
+          <a href="/2016/10/15/BUG汇总/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-JS小坑汇总" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/10/15/JS小坑汇总/" class="article-date">
+      <time datetime="2016-10-15T01:50:31.000Z" itemprop="datePublished">2016-10-15</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/10/15/JS小坑汇总/">JS小坑汇总</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+              <h3 id="下面总结一下平时遇到的一些常见JS小坑，遇到什么添加什么，持久更新！！"><a href="#下面总结一下平时遇到的一些常见JS小坑，遇到什么添加什么，持久更新！！" class="headerlink" title="下面总结一下平时遇到的一些常见JS小坑，遇到什么添加什么，持久更新！！"></a>下面总结一下平时遇到的一些常见JS小坑，遇到什么添加什么，持久更新！！</h3>
+          
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/前端/">前端</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/前端/">前端</a></li></ul>
+    </div>
+
+      
+        <p class="article-more-link">
+          <a href="/2016/10/15/JS小坑汇总/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-hexo和git" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/10/13/hexo和git/" class="article-date">
+      <time datetime="2016-10-13T01:50:31.000Z" itemprop="datePublished">2016-10-13</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/10/13/hexo和git/">hexo建立博客，git上传到远成仓库</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+              <p>自从入了hexo这个坑之后，享受了诸多甜头，也踩了无数的坑，几天吧踩过的坑来总结一下。<br>
+          
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/hexo/">hexo</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/">hexo</a></li></ul>
+    </div>
+
+      
+        <p class="article-more-link">
+          <a href="/2016/10/13/hexo和git/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
   
     <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
     </nav>
   
 </div>

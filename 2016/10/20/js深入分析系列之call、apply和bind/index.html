@@ -22,7 +22,7 @@
 <meta property="og:site_name" content="hexo姣小屋">
 <meta property="og:description" content="call,apply和bind实现了很多奇银翼巧，他们之所以神通广大，还是离不开他们改变this这个本领，下面就来探索一下它的强大之处吧。">
 <meta property="og:image" content="http://xiaoyi00112.github.io/imgs/bind的绑定逐步简化.png">
-<meta property="og:updated_time" content="2016-10-21T05:42:41.413Z">
+<meta property="og:updated_time" content="2016-10-21T07:18:26.036Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JS深入分析系列之call、apply和bind">
 <meta name="twitter:description" content="call,apply和bind实现了很多奇银翼巧，他们之所以神通广大，还是离不开他们改变this这个本领，下面就来探索一下它的强大之处吧。">
@@ -187,7 +187,7 @@
                 
                 <section class="switch-part switch-part2">
                     <div class="widget tagcloud" id="js-tagcloud">
-                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/BUG/">BUG</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Markdown语法/">Markdown语法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bind/">bind</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bootstrap/">bootstrap</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/call/">call</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/new/">new</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/this/">this</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/函数在内存中加载过程/">函数在内存中加载过程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前端/">前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/图片轮播/">图片轮播</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/构造函数/">构造函数</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/随笔/">随笔</a></li></ul>
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/BUG/">BUG</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Markdown语法/">Markdown语法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bind/">bind</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bootstrap/">bootstrap</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/call/">call</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/new/">new</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/this/">this</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/函数在内存中加载过程/">函数在内存中加载过程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前端/">前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/图片轮播/">图片轮播</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/构造函数/">构造函数</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/随笔/">随笔</a></li></ul>
                     </div>
                 </section>
                 
@@ -436,7 +436,8 @@ var leadingThirtysevenList = list.bind(undefined, 37);
 
 var list2 = leadingThirtysevenList(); // [37]
 var list3 = leadingThirtysevenList(1, 2, 3); // [37, 1, 2, 3]
-</code></pre><p><span id="ganhuo1"></span><br><strong>经过大概快一天的想法和推断，终于找到了解决方案，感谢啊！！！我的神！！！</strong></p>
+</code></pre><p><span id="ganhuo1"></span></p>
+<h4 id="纯干货，岩石出品，绝对正品"><a href="#纯干货，岩石出品，绝对正品" class="headerlink" title="纯干货，岩石出品，绝对正品"></a>纯干货，岩石出品，绝对正品</h4><p><strong>经过大概快一天的想法和推断，终于找到了解决方案，感谢啊！！！我的神！！！</strong></p>
 <p>是不是看着slice = Function.prototype.call.bind(Array.prototype.slice);这种反人类的写法很反人类,是不是看着这种Array.prototype.slice.call();这种写法有点蒙圈，不要怕不要怕，经过我一段时间的考虑，这个问题有一个很清楚简单的方法解决看不懂的问题。<br>源码没得看，度娘不好使，英文看不惯，不要怕，只要你坚持去想，并不断试问自己的初衷，不断从自己的出发点考虑这个问题，你一定会得到你的答案的！！！<br>好了废话不多说，现在就来干货！！<br>首先要从这个问题入手，我们为什么要用  </p>
 <pre><code>var slice = Array.prototype.slice;
 </code></pre><p>为什么下面这样写就出错了呢。</p>
@@ -544,7 +545,7 @@ console.log(slice.call(a));//[&quot;Tom&quot;,&quot;lili&quot;];
         <p><span>本文标题:</span><a href="/2016/10/20/js深入分析系列之call、apply和bind/">JS深入分析系列之call、apply和bind</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">Mr stone</a></p>
         <p><span>发布时间:</span>2016-10-20, 17:50:31</p>
-        <p><span>最后更新:</span>2016-10-21, 13:42:41</p>
+        <p><span>最后更新:</span>2016-10-21, 15:18:26</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2016/10/20/js深入分析系列之call、apply和bind/" title="JS深入分析系列之call、apply和bind">http://xiaoyi00112.github.io/2016/10/20/js深入分析系列之call、apply和bind/</a>
             <span class="copy-path" data-clipboard-text="原文: http://xiaoyi00112.github.io/2016/10/20/js深入分析系列之call、apply和bind/　　作者: Mr stone" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -574,7 +575,7 @@ console.log(slice.call(a));//[&quot;Tom&quot;,&quot;lili&quot;];
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#他们的相同点和区别"><span class="toc-number">1.</span> <span class="toc-text">他们的相同点和区别</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#再来点高级用法"><span class="toc-number">2.</span> <span class="toc-text">再来点高级用法</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#他们的相同点和区别"><span class="toc-number">1.</span> <span class="toc-text">他们的相同点和区别</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#再来点高级用法"><span class="toc-number">2.</span> <span class="toc-text">再来点高级用法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#纯干货，岩石出品，绝对正品"><span class="toc-number">3.</span> <span class="toc-text">纯干货，岩石出品，绝对正品</span></a></li></ol>
         
     </div>
     <style>
@@ -661,7 +662,7 @@ console.log(slice.call(a));//[&quot;Tom&quot;,&quot;lili&quot;];
         
     </div>
 
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/10/20/js深入分析系列之call、apply和bind/">JS深入分析系列之call、apply和bind</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/20/js对象、函数和变量在内存中的实现过程/">js深入分析系列之对象和函数内存加载过程</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/19/千变万化的this/">千变万化的this与构造函数和继承之间关系。</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/19/toString函数/">关于toString函数。</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/18/图片轮播/">图片轮播</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/13/hexo和git/">hexo建立博客，git上传到远成仓库</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/29/bootstrap学习之插件/">bootstrap学习之插件</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/28/bootstrap学习之组件/">bootstrap学习之组件</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/27/bootstrap学习之起步/">bootstrap学习之起步</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/27/Markdown语法总结1/">Markdown语法总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/26/BUG汇总/">BUG汇总</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/22/思考的重要性/">思考的重要性</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/21/第一篇博客/">第一篇博客</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/21/hello-my-honey-jiaojiao/">hello my honey jiaojiao</a></li></ul>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/10/20/js深入分析系列之call、apply和bind/">JS深入分析系列之call、apply和bind</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/20/js对象、函数和变量在内存中的实现过程/">js深入分析系列之对象和函数内存加载过程</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/19/千变万化的this/">千变万化的this与构造函数和继承之间关系。</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/19/toString函数/">关于toString函数。</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/18/图片轮播/">图片轮播</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/15/BUG汇总/">BUG汇总</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/15/JS小坑汇总/">JS小坑汇总</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/13/hexo和git/">hexo建立博客，git上传到远成仓库</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/29/bootstrap学习之插件/">bootstrap学习之插件</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/28/bootstrap学习之组件/">bootstrap学习之组件</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/27/bootstrap学习之起步/">bootstrap学习之起步</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/27/Markdown语法总结1/">Markdown语法总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/22/思考的重要性/">思考的重要性</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/21/第一篇博客/">第一篇博客</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/21/hello-my-honey-jiaojiao/">hello my honey jiaojiao</a></li></ul>
 
 
 
