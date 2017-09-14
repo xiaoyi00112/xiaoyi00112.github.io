@@ -15,16 +15,16 @@
 
 
 
-<meta name="description" content="下面总结一下平时遇到的一些常见JS小坑，遇到什么添加什么，持久更新！！">
+<meta name="description" content="Bootstrap全部知识点整理思维导图插件函数学习思维导图来一款小游戏放松一下2048">
 <meta property="og:type" content="article">
-<meta property="og:title" content="JS小坑汇总">
-<meta property="og:url" content="http://xiaoyi00112.github.io/2016/10/15/JS小坑汇总/index.html">
+<meta property="og:title" content="bootstrap学习之插件">
+<meta property="og:url" content="http://xiaoyi00112.github.io/2016/09/29/bootstrap/bootstrap学习之插件/index.html">
 <meta property="og:site_name" content="hexo姣小屋">
-<meta property="og:description" content="下面总结一下平时遇到的一些常见JS小坑，遇到什么添加什么，持久更新！！">
-<meta property="og:updated_time" content="2016-10-21T10:24:50.240Z">
+<meta property="og:description" content="Bootstrap全部知识点整理思维导图插件函数学习思维导图来一款小游戏放松一下2048">
+<meta property="og:updated_time" content="2016-10-13T09:50:39.759Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="JS小坑汇总">
-<meta name="twitter:description" content="下面总结一下平时遇到的一些常见JS小坑，遇到什么添加什么，持久更新！！">
+<meta name="twitter:title" content="bootstrap学习之插件">
+<meta name="twitter:description" content="Bootstrap全部知识点整理思维导图插件函数学习思维导图来一款小游戏放松一下2048">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -56,7 +56,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>JS小坑汇总 | hexo姣小屋</title>
+<title>bootstrap学习之插件 | hexo姣小屋</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -266,11 +266,11 @@
     </div>
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
-      <div class="body-wrap"><article id="post-JS小坑汇总" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-bootstrap/bootstrap学习之插件" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2016/10/15/JS小坑汇总/" class="article-date">
-      <time datetime="2016-10-15T01:50:31.000Z" itemprop="datePublished">2016-10-15</time>
+      <a href="/2016/09/29/bootstrap/bootstrap学习之插件/" class="article-date">
+      <time datetime="2016-09-29T01:50:31.000Z" itemprop="datePublished">2016-09-29</time>
 </a>
 
 
@@ -285,7 +285,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      JS小坑汇总
+      bootstrap学习之插件
     </h1>
   
 
@@ -300,7 +300,7 @@
 
         
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/前端/">前端</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/bootstrap/">bootstrap</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/前端/">前端</a></li></ul>
     </div>
 
         <div class="clearfix"></div>
@@ -310,26 +310,113 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h3 id="下面总结一下平时遇到的一些常见JS小坑，遇到什么添加什么，持久更新！！"><a href="#下面总结一下平时遇到的一些常见JS小坑，遇到什么添加什么，持久更新！！" class="headerlink" title="下面总结一下平时遇到的一些常见JS小坑，遇到什么添加什么，持久更新！！"></a>下面总结一下平时遇到的一些常见JS小坑，遇到什么添加什么，持久更新！！</h3><a id="more"></a>
-<h3 id="1、NaN问题："><a href="#1、NaN问题：" class="headerlink" title="1、NaN问题："></a>1、NaN问题：</h3><p>今天运行函数突然遇到一个NaN，吓我一跳NaN这个东东不常见啊。经测试，目前发现两种情况是NaN，</p>
-<ol>
-<li>NaN加任何数是NaN，</li>
-<li>undefined加任何数字都是NaN，</li>
-<li>Null加任何数字是任何数字。</li>
+        <p>Bootstrap全部知识点整理<a href="/imgs/Bootstrap全部知识点整理.svg">思维导图</a><br>插件函数学习<a href="/imgs/BootstrapPlugin.svg">思维导图</a><br>来一款小游戏放松一下<a href="http://htmlpreview.github.io/?https://github.com/xiaoyi00112/myWork/blob/master/2048/2048.html" target="_blank">2048</a></p>
+<a id="more"></a>
+<h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><ol>
+<li>Bootstrap提供给了用户十几个基于jQuery的插件函数，可以一次性全部引入，也可以进行单个插件函数的引入。</li>
+<li><p>调用方式有两种</p>
+<ul>
+<li><p>data属性进行调用，关闭方法</p>
+<pre><code>$(document).off(&apos;.data-api&apos;)
+</code></pre></li>
+<li><p>编程方式的API</p>
+<pre><code>$(&apos;.btn.danger&apos;).button(&apos;toggle&apos;).addClass(&apos;fat&apos;)
+</code></pre></li>
+</ul>
+</li>
 </ol>
-<p>一般就这三种不常见的情况，如果你的项目中突然出现NaN，最大的可能就是上面的第二项。</p>
-<h3 id="2、this鄙视题"><a href="#2、this鄙视题" class="headerlink" title="2、this鄙视题"></a>2、this鄙视题</h3><p>来看两个坑：</p>
-<pre><code>var o=10;
-var foo={
-    o:9,
-    bar:function(){
-        return this.o;
-    }
-}
-console.log(foo.bar());//9
-console.log((foo.bar=foo.bar)());//10  ,  这个括号里面是一个赋值表达式，吧foo.bar的值付给了foo.bar，foo.bar的值是一个地址假设0x9091，最后就成了(0x9091)();结果为10
-console.log((foo.bar,foo.bar)());//10  这个题首先要说一个事，那就是如果逗号表达式出现在console，或者return这样的语句里面，永远返回或输出最后一个逗号后面的那个值。别的不多说了。
-</code></pre>
+<h3 id="下拉菜单"><a href="#下拉菜单" class="headerlink" title="下拉菜单"></a>下拉菜单</h3><ol>
+<li>data属性方式：给链接或button添加data-toggle=”dropdown”</li>
+<li>js方法调用：$(‘.dropdown-toggle’).dropdown(),但是仍然需要加上data-toggle=”dropdown”。特殊效果是使下拉菜单一上来就显示$(‘.dropdown-toggle’).dropdown(‘toggle’)</li>
+</ol>
+<h3 id="标签页"><a href="#标签页" class="headerlink" title="标签页"></a>标签页</h3><ol>
+<li>data方式：data-toggle=”tab” or data-toggle=”pill”;<ul><li><a data-toggle="tab" href="#TABID"></a></li>
+<li><p>js方式：加入js代码（each tab needs to be activated individually）</p>
+<pre><code>$(&apos;#myTab a&apos;).click(function (e) {
+  e.preventDefault()
+  $(this).tab(&apos;show&apos;)
+})
+</code></pre></li>
+<li>Fade effect:渐变效果;.fade .in</li>
+</ul></li></ol>
+<h3 id="警告框"><a href="#警告框" class="headerlink" title="警告框"></a>警告框</h3><ol>
+<li>.alert .alert-warning<br>小差号：&amp;+times;加上.close会浮动到右边，<strong>注意：</strong>带符号的元素应该放到第一个子元素的位置上。  </li>
+<li>官方文档有一个”.sr-only”的属性，此属性是专为屏幕阅读器准备，屏幕阅读器外，其他设备上隐藏该元素，帮助残障人士设计。</li>
+<li>实现关闭效果推荐用data-的方式。具体实现方式是给button标签增加 data-dismiss=”alert” 自定义属性。</li>
+<li>如果给父元素添加 .fade 和 .in 类，那么元素关闭时呈现淡入淡出效果</li>
+</ol>
+<h3 id="工具提示、弹出框和摸态框"><a href="#工具提示、弹出框和摸态框" class="headerlink" title="工具提示、弹出框和摸态框"></a>工具提示、弹出框和摸态框</h3><p>三种形式的弹出框：1.工具提示（tooltip）；2.弹出框（popover）;(3).模态(modal)弹出框–重点；</p>
+<ol>
+<li><p>工具提示：加一个data-toggle=”toolti” title=”提示文字” data-placement=”弹出位置”，还需要加上一行js代码进行初始化：</p>
+<pre><code>$(function(){
+  $(&apos;[data-toggle=&quot;tooltip&quot;]&apos;).tooltip();
+})
+</code></pre></li>
+<li><p>弹出框：data-toggle=”popover” title=”标题” data-content=”弹出内容” ，同样也需要js代码进行初始化：</p>
+<pre><code>$(
+  $(&apos;[data-toggle=&quot;popover&quot;]&apos;).popover();
+)
+</code></pre></li>
+<li><p>模态弹出框： </p>
+<ul>
+<li>模态(Modal)子窗体：由某个父窗体打开，只要子窗体不关闭，父窗体无法获得输入焦点；且父子窗体可以互相传递数据。</li>
+<li>具体实现：摸态框固定定位，初始时一般不显示，将模态框放到HTML代码的文档最高层级，推荐放到body的最后，直接作为body的子元素。<br>c:data-toggle=”modal” herf=”目标元素”</li>
+<li>button触发：data-toggle=”modal” data-target=”目标元素”</li>
+<li><p>模态框的结构：</p>
+<pre><code>&lt;div class=&quot;modal&quot;&gt;--全屏的遮罩层
+  &lt;div class=&quot;modal-dialog&quot;&gt;--&gt;宽高、定位
+    &lt;div class=&quot;modal-content&quot;&gt;--&gt;背景色、边框、倒角、阴影
+      &lt;div class=&quot;modal-header&quot;&gt;&lt;/div&gt;
+      &lt;div class=&quot;modal-body&quot;&gt;&lt;/div&gt;
+      &lt;div class=&quot;modal-footer&quot;&gt;&lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre></li>
+<li><p>可以使用data-dsimiss=”modal”来关闭模态框。</p>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="Collapse折叠效果"><a href="#Collapse折叠效果" class="headerlink" title="Collapse折叠效果"></a>Collapse折叠效果</h3><ol>
+<li>使用a标签和button触发一个普通折叠效果：data-toggle=”collapse”;class里面有in的时候默认为显示，没有默认为隐藏  </li>
+<li>手风琴折叠效果：需要借助面板组件配合实现。需要.panel-group 可以吧导航信息放到</li>
+<li><p>响应式导航条：类似Bootstrap官网折叠导航栏效果</p>
+<pre><code>&lt;div  class=&quot;navbar navbar-default&quot;&gt;
+  &lt;div class=&quot;container&quot;&gt;
+    &lt;div class=&quot;navbar-header&quot;&gt;
+      &lt;a href=&quot;#&quot; class=&quot;navbar-brand&quot;&gt;TARENA&lt;/a&gt;
+      &lt;a href=&quot;#myNBA&quot; class=&quot;navbar-toggle&quot; data-toggle=&quot;collapse&quot;&gt;
+        &lt;span class=&quot;icon-bar&quot;&gt;&lt;/span&gt;
+        &lt;span class=&quot;icon-bar&quot;&gt;&lt;/span&gt;
+        &lt;span class=&quot;icon-bar&quot;&gt;&lt;/span&gt;
+      &lt;/a&gt;
+    &lt;/div&gt;
+    &lt;div id=&quot;myNBA&quot; class=&quot;collapse navbar-collapse&quot;&gt;
+      &lt;ul class=&quot;nav navbar-nav&quot;&gt;
+        &lt;li&gt;&lt;a href=&quot;#&quot;&gt;首页&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&quot;#&quot;&gt;首页1&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&quot;#&quot;&gt;首页2&lt;/a&gt;&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre></li>
+</ol>
+<h3 id="Carousel广告轮播。旋转木马"><a href="#Carousel广告轮播。旋转木马" class="headerlink" title="Carousel广告轮播。旋转木马"></a>Carousel广告轮播。旋转木马</h3><ol>
+<li>首先需要一个carousel的父容器div，slide是带滑动效果，id为了之后的点击滑动，data-ride=”carousel”,data-interval=”设定时间”；</li>
+<li>然后内部建立carousel-inner,内部建立一个.item的div，div中一次可以放img图片和加入图片的文字，加入文字需要再建立一个.carousel-caption的容器div，里面放入内容</li>
+<li>左右点击用a标签，href制定为carousel父容器的id，data-slide=”prev/next”</li>
+<li>滑动可以用ul和li来制作，ul的class为carousel-indicators,li设置data-target=”ID” data-slide-to=”图片位置”。</li>
+<li><strong>注意：</strong>放在carousel-inner外的元素不随广告滚动</li>
+</ol>
+<h3 id="Affix附加导航"><a href="#Affix附加导航" class="headerlink" title="Affix附加导航"></a>Affix附加导航</h3><p>给每个标题加上id,然后添加一个data-spy=”affix”的导航元素。元素内部还定义有一个data-offset-top=””的属性。</p>
+<ul>
+<li>data-spy=”affix” 定义导航元素。</li>
+<li>data-offset-top:<strong>从网上找了好多答案，说的都挺模糊</strong>其实这个属性还可以写成data-offset和data-offset-bottom,这两种形式，data-offset-top的意思是当你鼠标往上滚动的距离为多少的时候，这个导航条会随着页面动，也就是说，如果你把这个值设为0，你一往下滚动鼠标，导航条就随着页面动，如果设为100，那么你的鼠标滚动100px的时候导航条才会动，并且适应屏幕。</li>
+</ul>
+<h3 id="滚动监听（快要胜利了啊）"><a href="#滚动监听（快要胜利了啊）" class="headerlink" title="滚动监听（快要胜利了啊）"></a>滚动监听（快要胜利了啊）</h3><p>只要在附加导航的基础上，再在body上声明滚动监听属性，就可以实现滚动监听了。。。。。。额。。。just like that.oh my gold…<br>还是要写出滚动监听的 自定义属性的样子的 ： data-spy=”scroll” data-target=”#ID”..</p>
+<h3 id="好吧-到此结束，该吃饭的吃饭，该睡觉的睡觉，大家伙都散了吧，没听尽兴的明儿再来，我也真够啰嗦的。。。"><a href="#好吧-到此结束，该吃饭的吃饭，该睡觉的睡觉，大家伙都散了吧，没听尽兴的明儿再来，我也真够啰嗦的。。。" class="headerlink" title="好吧~~到此结束，该吃饭的吃饭，该睡觉的睡觉，大家伙都散了吧，没听尽兴的明儿再来，我也真够啰嗦的。。。"></a>好吧~~到此结束，该吃饭的吃饭，该睡觉的睡觉，大家伙都散了吧，没听尽兴的明儿再来，我也真够啰嗦的。。。</h3>
       
     </div>
     
@@ -337,13 +424,13 @@ console.log((foo.bar,foo.bar)());//10  这个题首先要说一个事，那就�
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2016/10/15/JS小坑汇总/">JS小坑汇总</a></p>
+        <p><span>本文标题:</span><a href="/2016/09/29/bootstrap/bootstrap学习之插件/">bootstrap学习之插件</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">Mr stone</a></p>
-        <p><span>发布时间:</span>2016-10-15, 09:50:31</p>
-        <p><span>最后更新:</span>2016-10-21, 18:24:50</p>
+        <p><span>发布时间:</span>2016-09-29, 09:50:31</p>
+        <p><span>最后更新:</span>2016-10-13, 17:50:39</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2016/10/15/JS小坑汇总/" title="JS小坑汇总">http://xiaoyi00112.github.io/2016/10/15/JS小坑汇总/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://xiaoyi00112.github.io/2016/10/15/JS小坑汇总/　　作者: Mr stone" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2016/09/29/bootstrap/bootstrap学习之插件/" title="bootstrap学习之插件">http://xiaoyi00112.github.io/2016/09/29/bootstrap/bootstrap学习之插件/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://xiaoyi00112.github.io/2016/09/29/bootstrap/bootstrap学习之插件/　　作者: Mr stone" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
         <p>
@@ -356,15 +443,15 @@ console.log((foo.bar,foo.bar)());//10  这个题首先要说一个事，那就�
     <nav id="article-nav">
         
             <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2016/10/15/BUG汇总/">
-                    BUG汇总
+                <a href="/2016/10/13/hexo和git/">
+                    hexo建立博客，git上传到远成仓库
                 </a>
             </div>
         
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/2016/10/13/hexo和git/">
-                    hexo建立博客，git上传到远成仓库
+                <a href="/2016/09/28/bootstrap/bootstrap学习之组件/">
+                    bootstrap学习之组件
                 </a>
             </div>
         
@@ -376,7 +463,7 @@ console.log((foo.bar,foo.bar)());//10  这个题首先要说一个事，那就�
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#下面总结一下平时遇到的一些常见JS小坑，遇到什么添加什么，持久更新！！"><span class="toc-number">1.</span> <span class="toc-text">下面总结一下平时遇到的一些常见JS小坑，遇到什么添加什么，持久更新！！</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1、NaN问题："><span class="toc-number">2.</span> <span class="toc-text">1、NaN问题：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2、this鄙视题"><span class="toc-number">3.</span> <span class="toc-text">2、this鄙视题</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#概述"><span class="toc-number">1.</span> <span class="toc-text">概述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#下拉菜单"><span class="toc-number">2.</span> <span class="toc-text">下拉菜单</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#标签页"><span class="toc-number">3.</span> <span class="toc-text">标签页</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#警告框"><span class="toc-number">4.</span> <span class="toc-text">警告框</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#工具提示、弹出框和摸态框"><span class="toc-number">5.</span> <span class="toc-text">工具提示、弹出框和摸态框</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Collapse折叠效果"><span class="toc-number">6.</span> <span class="toc-text">Collapse折叠效果</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Carousel广告轮播。旋转木马"><span class="toc-number">7.</span> <span class="toc-text">Carousel广告轮播。旋转木马</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Affix附加导航"><span class="toc-number">8.</span> <span class="toc-text">Affix附加导航</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#滚动监听（快要胜利了啊）"><span class="toc-number">9.</span> <span class="toc-text">滚动监听（快要胜利了啊）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#好吧-到此结束，该吃饭的吃饭，该睡觉的睡觉，大家伙都散了吧，没听尽兴的明儿再来，我也真够啰嗦的。。。"><span class="toc-number">10.</span> <span class="toc-text">好吧~~到此结束，该吃饭的吃饭，该睡觉的睡觉，大家伙都散了吧，没听尽兴的明儿再来，我也真够啰嗦的。。。</span></a></li></ol>
         
     </div>
     <style>
@@ -412,7 +499,7 @@ console.log((foo.bar,foo.bar)());//10  这个题首先要说一个事，那就�
         </div>
         <script>
             window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"JS小坑汇总　| hexo姣小屋　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+                "common":{"bdSnsKey":{},"bdText":"bootstrap学习之插件　| hexo姣小屋　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
         </script>
     
 
@@ -428,7 +515,7 @@ console.log((foo.bar,foo.bar)());//10  这个题首先要说一个事，那就�
     
       <div class="duoshuo" id="comments">
     <div id="comment-box" ></div>
-    <div class="ds-thread" id="ds-thread" data-thread-key="2016/10/15/JS小坑汇总/" data-title="JS小坑汇总" data-url="http://xiaoyi00112.github.io/2016/10/15/JS小坑汇总/"></div>
+    <div class="ds-thread" id="ds-thread" data-thread-key="2016/09/29/bootstrap/bootstrap学习之插件/" data-title="bootstrap学习之插件" data-url="http://xiaoyi00112.github.io/2016/09/29/bootstrap/bootstrap学习之插件/"></div>
     <script>
         var duoshuoQuery = {short_name:"xiaoyi00112"};
         var loadComment = function(){
@@ -451,7 +538,7 @@ console.log((foo.bar,foo.bar)());//10  这个题首先要说一个事，那就�
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2016/10/15/BUG汇总/" title="上一篇: BUG汇总">
+            <a href="/2016/10/13/hexo和git/" title="上一篇: hexo建立博客，git上传到远成仓库">
                 <i class="fa fa-angle-left"></i>
             </a>
         
@@ -459,7 +546,7 @@ console.log((foo.bar,foo.bar)());//10  这个题首先要说一个事，那就�
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2016/10/13/hexo和git/" title="下一篇: hexo建立博客，git上传到远成仓库">
+            <a href="/2016/09/28/bootstrap/bootstrap学习之组件/" title="下一篇: bootstrap学习之组件">
                 <i class="fa fa-angle-right"></i>
             </a>
         
